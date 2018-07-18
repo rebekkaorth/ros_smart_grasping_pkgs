@@ -2,6 +2,9 @@
 
 import rospy
 from std_msgs.msg import String
+from smart_grasping_sandbox.smart_grasper import SmartGrasper
+
+grasper = SmartGrasper()
 
 def talker():
     pub = rospy.Publisher('chatter', String, queue_size=10)
@@ -10,12 +13,17 @@ def talker():
     while not rospy.is_shutdown():
         hello_str = "Hello World %s" % rospy.get_time()
         rospy.loginfo(hello_str)
-        pub.publisher(hello_str)
+        pub.publish(hello_str)
         rate.sleep()
+        
+def grasp_ball(): 
+    grasper.pick()
+    grasper.open_hand()
+    
         
 if __name__ == '__main__':
     try:
-        talker()
+        grasp_ball()
         
-    except rospy.ROSInterruptExeception:
+    except rospy.ROSInterruptException:
         pass
