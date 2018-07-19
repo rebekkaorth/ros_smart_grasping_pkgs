@@ -25,6 +25,10 @@ from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
 
+import request
+
+
+
 # Instantiate CvBridge
 bridge = CvBridge()
 
@@ -42,6 +46,9 @@ def image_callback(msg):
     else:
         # Save your OpenCV2 image as a jpeg 
         cv2.imwrite('camera_image.jpeg', cv2_img)
+        
+        r = requests.get(cv2_img, allow_redirects=True)
+        open('color-img.jpeg', 'wb').write(r.content)
 
 def main():
     rospy.init_node('image_listener')
@@ -51,7 +58,7 @@ def main():
     
     # Set up your subscriber and define its callback
     
-    rospy.Subscriber(image_topic, Image, image_callback)
+    rospy.Subscriber(image_topic, Image, image_callback, queue_size=3)
     
     # Spin until ctrl + c
     rospy.spin()
