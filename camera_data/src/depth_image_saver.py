@@ -19,7 +19,7 @@ https://gist.github.com/rethink-imcmahon/77a1a4d5506258f3dc1f - 19/07/2018
 # rospy for the subscriber
 import rospy
 # ROS Image message
-from sensor_msgs.msg import Image, CameraInfo
+from sensor_msgs.msg import Image
 # ROS Image message -> OpenCV2 image converter
 from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
@@ -31,44 +31,37 @@ import request
 
 # Instantiate CvBridge
 bridge = CvBridge()
-        
-def save_camera_info_callback(msg):
+
+def save_depth_image_callback(msg):
     
-    print("camera info received!")
-    print(msg)
+    print("Received an image!")
     
-    camera_info = open('camera-info.txt', 'w')
-    
-    for line in
-        camera_info.write(line)
+    try:
+        # Convert your ROS Image message to OpenCV2
+        cv2_img = bridge.imgmsg_to_cv2(msg, "rgb8")
         
-    camera_info.close()
-    
-    # try:
-    #    cv2_info = bridge.imgmsg_to_cv2(msg)
+    except CvBridgeError, e:
+        print(e)
         
-    # except CvBridgeError, e: 
-    #    print(e)
+    else:
+        # Save your OpenCV2 image as a jpeg 
+        cv2.imwrite('depth_image.jpeg', cv2_img)
         
-    # else:
-    #    cv2.imwrite('camera-info.txt', msg)
-        
-    #    r = requests.get(msg, allow_redirects=True)
-        
-       
+        r = requests.get(cv2_img, allow_redirects=True)
+        open('depth-img.jpeg', 'wb').write(r.content)
         
         
 
 def save_image():
-    rospy.init_node('image_info_listener')
+    rospy.init_node('depth_image_listener')
     
     # Define your image topic
-    image_topic_camera_info = "/kinect_sim/camera1/rgb/camera_info"
+    image_topic_color_img = "/kinect_sim/camera1/depth/image_raw"
     
     
     # Set up your subscriber and define its callback
-    rospy.Subscriber(image_topic_camera_info, CameraInfo, save_camera_info_callback, queue_size=1)
-    
+    rospy.Subscriber(image_topic_color_img, Image, save_depth_image_callback, queue_size=1)
+
     # Spin until ctrl + c
     rospy.spin()
 

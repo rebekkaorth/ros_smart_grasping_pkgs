@@ -38,7 +38,7 @@ def save_color_image_callback(msg):
     
     try:
         # Convert your ROS Image message to OpenCV2
-        cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")
+        cv2_img = bridge.imgmsg_to_cv2(msg, "rgb8")  # rgb image with red-/green-/blue-channel
         
     except CvBridgeError, e:
         print(e)
@@ -51,36 +51,16 @@ def save_color_image_callback(msg):
         open('color-img.jpeg', 'wb').write(r.content)
         
         
-def save_camera_info_callback(msg):
-    
-    print("camera info received!")
-    
-    try:
-        cv2_img = bridge.imgmsg_to_cv2(msg, "br8")
-        
-    except CvBridgeError, e: 
-        print(e)
-        
-    else:
-        cv2.imwrite('camera-info.jpeg', cv2_img)
-        
-        r = requests.get(cv2_img, allow_redirects=True)
-        oppen('camera-info.jpeg', 'wb').write(r.content)
-        
-        
-
 def save_image():
     rospy.init_node('image_listener')
     
     # Define your image topic
-    image_topic_color_img = "/camera/depth/image_raw"
-    image_topic_camera_info = "/camera/depth/camera_info"
+    image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"
     
     
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_color_img, Image, save_color_image_callback, queue_size=1)
-    rospy.Subscriber(image_topic_camera_info, Image, save_camera_info_callback, queue_size=1)
-    
+
     # Spin until ctrl + c
     rospy.spin()
 
