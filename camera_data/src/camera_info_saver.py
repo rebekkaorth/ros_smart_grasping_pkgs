@@ -31,37 +31,37 @@ import request
 
 # Instantiate CvBridge
 bridge = CvBridge()
-
-def image_callback(msg):
+        
+def save_camera_info_callback(msg):
     
-    print("Received an image!")
+    print("camera info received!")
     
     try:
-        # Convert your ROS Image message to OpenCV2
-        cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")
+        cv2_img = bridge.imgmsg_to_cv2(msg, "br8")
         
-    except CvBridgeError, e:
+    except CvBridgeError, e: 
         print(e)
         
     else:
-        # Save your OpenCV2 image as a jpeg 
-        cv2.imwrite('camera_image.jpeg', cv2_img)
+        cv2.imwrite('camera-info.png', cv2_img)
         
         r = requests.get(cv2_img, allow_redirects=True)
-        open('color-img.jpeg', 'wb').write(r.content)
+        open('camera-info.png', 'wb').write(r.content)
+        
+        
 
-def main():
-    rospy.init_node('image_listener')
+def save_image():
+    rospy.init_node('image_info_listener')
     
     # Define your image topic
-    image_topic = "/camera/depth/image_raw"
+    image_topic_camera_info = "/camera/depth/camera_info"
+    
     
     # Set up your subscriber and define its callback
-    
-    rospy.Subscriber(image_topic, Image, image_callback, queue_size=3)
+    rospy.Subscriber(image_topic_camera_info, Image, save_camera_info_callback, queue_size=1)
     
     # Spin until ctrl + c
     rospy.spin()
 
 if __name__ == '__main__':
-    main()
+    save_image()

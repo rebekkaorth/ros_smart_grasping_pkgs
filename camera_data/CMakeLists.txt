@@ -196,3 +196,11 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest(test/image_saver_test.test)
+endif()
+
+
+catkin_add_nosetests(tests/image_saver_test.py)
