@@ -26,8 +26,6 @@ from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
 
-import request
-
 
 
 # Instantiate CvBridge

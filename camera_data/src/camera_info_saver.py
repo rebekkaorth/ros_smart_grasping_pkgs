@@ -25,7 +25,7 @@ from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
 
-import request
+import numpy as np
 
 
 
@@ -37,26 +37,16 @@ def save_camera_info_callback(msg):
     print("camera info received!")
     print(msg)
     
-    camera_info = open('camera-info.txt', 'w')
-    
-    for line in
-        camera_info.write(line)
+    try:
+        camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt', 'w')
+        msg_as_string = str(msg)
+        camera_info.write(msg_as_string)
+            
+        camera_info.close()
         
-    camera_info.close()
-    
-    # try:
-    #    cv2_info = bridge.imgmsg_to_cv2(msg)
-        
-    # except CvBridgeError, e: 
-    #    print(e)
-        
-    # else:
-    #    cv2.imwrite('camera-info.txt', msg)
-        
-    #    r = requests.get(msg, allow_redirects=True)
-        
-       
-        
+
+    except CvBridgeError, e: 
+        print(e)
         
 
 def save_image():
