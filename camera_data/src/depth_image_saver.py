@@ -18,8 +18,9 @@ https://gist.github.com/rethink-imcmahon/77a1a4d5506258f3dc1f - 19/07/2018
 
 # rospy for the subscriber
 import rospy
+import numpy as np
 # ROS Image message
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image, PointCloud2
 # ROS Image message -> OpenCV2 image converter
 from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
@@ -34,23 +35,23 @@ bridge = CvBridge()
 
 def save_depth_image_callback(msg):
     
-    print("Received an image!")
+    print("Received an depth image!")
     
+    # cited code beginning
+    # Retrieved from: https://answers.ros.org/question/255413/unable-to-store-the-depth-map-in-32fc1-format/ - 24/07/2018
+    # Username: Joy16
     try:
-        # Convert your ROS Image message to OpenCV2
-        cv2_img = bridge.imgmsg_to_cv2(msg, "mono16")
+        NewImg = bridge.imgmsg_to_cv2(msg,"passthrough")
+        depth_array = np.array(NewImg, dtype=np.float32)
+        cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
+        print msg.encoding
+        print
+        cv2.imwrite("/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png", depth_array*255)
+    # cited code end     
         
     except CvBridgeError, e:
         print(e)
-        
-    else:
-        # Save your OpenCV2 image as a jpeg 
-        cv2.imwrite('depth_image.jpeg', cv2_img)
-        
-        r = requests.get(cv2_img, allow_redirects=True)
-        open('depth-img.jpeg', 'wb').write(r.content)
-        
-        
+
 
 def save_image():
     rospy.init_node('depth_image_listener')

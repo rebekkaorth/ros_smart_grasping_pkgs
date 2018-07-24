@@ -34,21 +34,17 @@ bridge = CvBridge()
 
 def save_color_image_callback(msg):
     
-    print("Received an image!")
+    print("Received a color image!")
     
     try:
         # Convert your ROS Image message to OpenCV2
-        cv2_img = bridge.imgmsg_to_cv2(msg, "rgb8")  # rgb image with red-/green-/blue-channel
+        cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")  # rgb image with red-/green-/blue-channel
+        
+        # Save your OpenCV2 image as a png 
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/camera_image.png', cv2_img)
         
     except CvBridgeError, e:
         print(e)
-        
-    else:
-        # Save your OpenCV2 image as a jpeg 
-        cv2.imwrite('camera_image.jpeg', cv2_img)
-        
-        r = requests.get(cv2_img, allow_redirects=True)
-        open('color-img.jpeg', 'wb').write(r.content)
         
         
 def save_image():
