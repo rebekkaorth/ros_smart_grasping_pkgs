@@ -17,8 +17,10 @@ def talker():
         rate.sleep()
         
 def grasp_ball(): 
-    grasper.pick()
-    grasper.open_hand()
+     print(grasper.get_object_pose())
+     grasper.pick()
+     grasper.open_hand()
+    
     
         
 if __name__ == '__main__':
