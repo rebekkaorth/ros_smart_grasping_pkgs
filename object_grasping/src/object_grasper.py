@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import String
 from smart_grasping_sandbox.smart_grasper import SmartGrasper
 import time
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import Pose, Point
 from tf.transformations import quaternion_from_euler
 from math import pi, cos, sin
-import sys
 
 grasper = SmartGrasper()
 
@@ -88,18 +86,19 @@ def grasp_object(x=0, y=0, z=0):
     grasper.check_fingers_collisions(True)
     
     # lift_object(object_pose)
+    
+def callback(data):
+    
+    rospy.loginfo('received data')
+    point = data
+    grasp_object(point.x, point.y, point.z)
+    
 
 def grasping_service():
-    rospy.wait_for_service('predict_object_pose')
     
-    try: 
-        predict_object_pose_service = rospy.ServiceProxy('predict_object_pose')
-        x, y, z = predict_object_pose_service()
-        grasp_object(x, y, z)
-        
-    except rospy.ServiceException e: 
-        print("service call failed")
-        
+    predict_object_pose_service = rospy.Subscriber('predict_object_pose_server', Point, callback)
+
+
 if __name__ == '__main__':
     
     try:
