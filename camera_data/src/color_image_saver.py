@@ -38,7 +38,7 @@ def save_color_image_callback(msg):
         cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")  # rgb image with red-/green-/blue-channel
         
         # Save your OpenCV2 image as a png 
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/camera_image.png', cv2_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png', cv2_img)
         
     except CvBridgeError, e:
         print(e)

@@ -7,15 +7,9 @@ import time
 from geometry_msgs.msg import Pose
 from tf.transformations import quaternion_from_euler
 from math import pi, cos, sin
+import sys
 
 grasper = SmartGrasper()
-
-
-def node_init():
-    rospy.init_node('object_grasper', anonymous=True)
-    
-    sub = rospy.Subscriber('smart_grasper', String, queue_size=10)
-    
 
 def lift_object(pose): 
     
@@ -48,7 +42,11 @@ def move_object_to_location(pose, x, y, z):
     grasper.check_fingers_collisions(False)
     
         
-def grasp_object(x=0, y=0, z=0, x_r=0, y_r=0, z_r=0):
+def grasp_object(x=0, y=0, z=0):
+    
+    # rospy.init_node('object_grasper', anonymous=True)
+    
+    # sub = rospy.Subscriber('smart_grasper', String, queue_size=10)
     
     object_pose = Pose()
     
@@ -58,10 +56,9 @@ def grasp_object(x=0, y=0, z=0, x_r=0, y_r=0, z_r=0):
     
     object_pose.position.z += 0.9
     
-    # object_pose.orientation.x = x_r
-    # object_pose.orientation.y = y_r
-    # object_pose.orientation.z = z_r
-    # object_pose.orientation.w = 0 
+    x_r = -pi/2.
+    y_r = 0
+    z_r = 0
     
     quaternion = quaternion_from_euler(x_r, y_r, z_r)
     object_pose.orientation.x = quaternion[0]
@@ -91,22 +88,27 @@ def grasp_object(x=0, y=0, z=0, x_r=0, y_r=0, z_r=0):
     grasper.check_fingers_collisions(True)
     
     # lift_object(object_pose)
+
+def grasping_service():
+    rospy.wait_for_service('predict_object_pose')
     
+    try: 
+        predict_object_pose_service = rospy.ServiceProxy('predict_object_pose')
+        x, y, z = predict_object_pose_service()
+        grasp_object(x, y, z)
+        
+    except rospy.ServiceException e: 
+        print("service call failed")
         
 if __name__ == '__main__':
     
     try:
-        x = -0.472
-        y = 0.159
-        z = 0.772
+        # x = -0.472
+        # y = 0.159
+        # z = 0.772
+        # grasp_object(x, y, z)
         
-        # calculating Euler angles from the rotation values as radiants 
-        x_r = -pi/2.#cos(yaw) * cos(pitch)
-        y_r = 0#sin(yaw) * cos(pitch)
-        z_r = 0#sin(pitch)
-        
-        
-        grasp_object(x, y, z, x_r, y_r, z_r)
+        grasping_service()
         
     except rospy.ROSInterruptException:
         pass
