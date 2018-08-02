@@ -7,7 +7,7 @@
 # in order to use this service properly these nodes need to be run first
 
 import rospy
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Pose
 
 # the following function and its content is merely an example and a place holder for the function
 # that uses a working neural network
@@ -25,24 +25,26 @@ def predict_object_pose():
     
     # As long as the neural network is not yet implemented the following output will be returned
     # The following variables represent the (predicted) pose of the object 
-    point = Point() 
-    point.x = 0.15 
-    point.y = 0
-    point.z = 0.772
+    pose = Pose() 
+    pose.position.x = 0.15 
+    pose.position.y = 0
+    pose.position.z = 0.772
 
-    return point
+    return pose
     
 
-def predict_object_pose_server():
+def talker():
+    pub = rospy.Publisher('chatter', Pose, queue_size=10)
+    rospy.init_node('talker', anonymous=True)
+    predicted_pose = predict_object_pose()
+    rospy.loginfo(predicted_pose)
+    pub.publish(predicted_pose)
+        
+ 
+if __name__ == '__main__':
     
-    pub_nn_output = rospy.Publisher('pub_nn_output', Point, queue_size=10)
+    try:
+        talker()
     
-    rospy.init_node('predict_object_pose_server', anonymous=True)
-    rate = rospy.Rate(10)
-    while not rospy.is_shutdown():
-        pub_nn_output.publish(predict_object_pose())
-        rate.sleep()
-
-
-if __name__ == "__main__":
-    predict_object_pose_server()
+    except rospy.ROSInterruptException:
+        pass

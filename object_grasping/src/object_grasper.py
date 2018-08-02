@@ -40,17 +40,17 @@ def move_object_to_location(pose, x, y, z):
     grasper.check_fingers_collisions(False)
     
         
-def grasp_object(x=0, y=0, z=0):
+def grasp_object(object_pose):
     
     # rospy.init_node('object_grasper', anonymous=True)
     
     # sub = rospy.Subscriber('smart_grasper', String, queue_size=10)
     
-    object_pose = Pose()
+    # object_pose = Pose()
     
-    object_pose.position.x = x
-    object_pose.position.y = y
-    object_pose.position.z = z
+    # object_pose.position.x = x
+    # object_pose.position.y = y
+    # object_pose.position.z = z
     
     object_pose.position.z += 0.9
     
@@ -88,26 +88,30 @@ def grasp_object(x=0, y=0, z=0):
     # lift_object(object_pose)
     
 def callback(data):
-    
-    rospy.loginfo('received data')
-    point = data
-    grasp_object(point.x, point.y, point.z)
-    
+    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data)
+    rospy.loginfo(data.position.x)
+    grasp_object(data)
+     
+def listener():
+ 
+    # rospy.init_node('listener', anonymous=True)
+ 
+    rospy.Subscriber("chatter", Pose, callback)
 
-def grasping_service():
-    
-    predict_object_pose_service = rospy.Subscriber('predict_object_pose_server', Point, callback)
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
 
 
 if __name__ == '__main__':
     
     try:
-        # x = -0.472
-        # y = 0.159
-        # z = 0.772
-        # grasp_object(x, y, z)
+        pose = Pose()
+        pose.position.x = -0.472
+        pose.position.y = 0.159
+        pose.position.z = 0.772
+        grasp_object(pose)
         
-        grasping_service()
+        # listener()
         
     except rospy.ROSInterruptException:
         pass
