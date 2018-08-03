@@ -16,7 +16,13 @@ bridge = CvBridge()
 def move_robot_around_object():
     grasper = SmartGrasper()
     
+    rospy.loginfo("move robot arm around table")
+    time.sleep(1)
     
+    for _ in range(10):
+        grasper.move_tip(x=1)
+        grasper.move_tip(z=1)
+        time.sleep(0.1)
     
 
 def save_color_image(msg):
