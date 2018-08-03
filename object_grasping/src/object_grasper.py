@@ -52,7 +52,7 @@ def grasp_object(object_pose):
     # object_pose.position.y = y
     # object_pose.position.z = z
     
-    object_pose.position.z += 0.9
+    object_pose.position.z += 0.2
     
     x_r = -pi/2.
     y_r = 0
@@ -85,19 +85,22 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     grasper.check_fingers_collisions(True)
     
-    # lift_object(object_pose)
+    lift_object(object_pose)
     
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data)
-    rospy.loginfo(data.position.x)
+    rospy.loginfo('pose recevied')
+    
     grasp_object(data)
+        
+    
      
-def listener():
+def get_pose():
  
     # rospy.init_node('listener', anonymous=True)
- 
-    rospy.Subscriber("chatter", Pose, callback)
-
+    pose = rospy.wait_for_message("chatter", Pose)
+    rospy.loginfo('pose received')
+    grasp_object(pose)
+    
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
@@ -111,7 +114,7 @@ if __name__ == '__main__':
         pose.position.z = 0.772
         grasp_object(pose)
         
-        # listener()
+        # get_pose()
         
     except rospy.ROSInterruptException:
         pass

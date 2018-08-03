@@ -1,21 +1,5 @@
 #!/usr/bin/env python
 
-'''
-Retrieved from: 
-https://gist.github.com/rethink-imcmahon/77a1a4d5506258f3dc1f - 19/07/2018
-''' 
-
-'''
- Copyright (c) 2015, Rethink Robotics, Inc.
-
- Using this CvBridge Tutorial for converting
- ROS images to OpenCV2 images
- http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
-
- Using this OpenCV2 tutorial for saving Images:
- http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html
-'''
-
 # rospy for the subscriber
 import rospy
 import numpy as np
@@ -43,7 +27,6 @@ def save_depth_image_callback(msg):
         depth_array = np.array(NewImg, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
         print msg.encoding
-        print
         cv2.imwrite("/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png", depth_array*255)
     # cited code end     
         

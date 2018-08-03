@@ -37,8 +37,13 @@ def talker():
     pub = rospy.Publisher('chatter', Pose, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     predicted_pose = predict_object_pose()
-    rospy.loginfo(predicted_pose)
-    pub.publish(predicted_pose)
+    rate = rospy.Rate(1)
+    num = 0
+    while not rospy.is_shutdown() and num < 1:
+        rospy.loginfo(predicted_pose)
+        pub.publish(predicted_pose)
+        rate.sleep()
+        num += 1
         
  
 if __name__ == '__main__':
