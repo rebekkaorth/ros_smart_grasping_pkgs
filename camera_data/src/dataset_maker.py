@@ -12,6 +12,7 @@ from tf.transformations import quaternion_from_euler
 from math import pi, cos, sin
 
 bridge = CvBridge()
+image_number = 0
 
 def move_robot_around_object(pose):
     grasper = SmartGrasper()
@@ -47,6 +48,8 @@ def move_robot_around_object(pose):
     
 
 def save_color_image(msg):
+    
+    num_img = 0
 
 # Retrieved from: 
 # https://gist.github.com/rethink-imcmahon/77a1a4d5506258f3dc1f - 19/07/2018 :
@@ -66,15 +69,19 @@ def save_color_image(msg):
         color_img = bridge.imgmsg_to_cv2(msg, "bgr8")  # rgb image with red-/green-/blue-channel
         
         # Save your OpenCV2 image as a png 
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image.png', color_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_' + str(num_img) + '.png', color_img)
        
+    num_img += 1
+    
     except CvBridgeError, e:
         print(e)
         
 
 def save_depth_image(msg):
     
-    print("Recieved depth image for dataset")
+    image_number = 0
+    
+    rospy.loginfo("Recieved depth image for dataset")
     
     # cited code beginning
     # Retrieved from: https://answers.ros.org/question/255413/unable-to-store-the-depth-map-in-32fc1-format/ - 24/07/2018
@@ -84,16 +91,18 @@ def save_depth_image(msg):
         depth_array = np.array(depth_img, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
         
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image.png', depth_img)
-     # cited code end    
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_' + str(image_number) + '.png', depth_img)
+     # cited code end   
+     
+    image_number += 1
      
     except CvBridgeError, er: 
         print(er)
         
 def save_camera_info(msg):
-    print("Recieved camera info for dataset")
+    rospy.loginfo("Recieved camera info for dataset")
     
-    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera-info.txt', 'w')
+    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info.txt', 'w')
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
             
@@ -101,12 +110,12 @@ def save_camera_info(msg):
         
         
 def save_dataset():
+    
     # The position of the object should be known before creating the dataset
     pose = Pose()
     pose.position.x = 0.15
     pose.position.y = 0
     pose.position.z = 0.772
-    move_robot_around_object(pose)
     
     # color image topic
     image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"
@@ -123,9 +132,10 @@ def save_dataset():
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=1)
 
+    move_robot_around_object(pose)
+    
     # Spin until ctrl + c
     rospy.spin()
-
 
 if __name__ == '__main__':
     save_dataset()
