@@ -19,9 +19,13 @@ def move_robot_around_object():
     rospy.loginfo("move robot arm around table")
     time.sleep(1)
     
-    for _ in range(10):
-        grasper.move_tip(x=1)
-        grasper.move_tip(z=1)
+    #rospy.loginfo("move robot to start position")
+    #grasper.move_tip(x=1.218, y=1, z=0.672)
+    
+    rospy.loginfo("move robot around object")
+    for _ in range(5):
+        grasper.move_tip(x=0.1)
+        grasper.move_tip(y=0.1)
         time.sleep(0.1)
     
 
@@ -38,7 +42,7 @@ def save_color_image(msg):
     # http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html
 
     
-    print("Recieved color image for dataset")
+    rospy.loginfo("Recieved color image for dataset")
     
     try:
         # Convert your ROS Image message to OpenCV2
@@ -52,6 +56,7 @@ def save_color_image(msg):
         
 
 def save_depth_image(msg):
+    
     print("Recieved depth image for dataset")
     
     # cited code beginning
@@ -79,7 +84,8 @@ def save_camera_info(msg):
         
         
 def save_dataset():
-    rospy.init_node('dataset_listener')
+    
+    move_robot_around_object()
     
     # color image topic
     image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"

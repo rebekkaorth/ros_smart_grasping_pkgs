@@ -1,8 +1,8 @@
 header: 
-  seq: 37
+  seq: 2
   stamp: 
-    secs: 7666
-    nsecs: 579000000
+    secs: 79
+    nsecs: 186000000
   frame_id: camera_link
 height: 480
 width: 640

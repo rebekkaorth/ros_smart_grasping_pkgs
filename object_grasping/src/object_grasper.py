@@ -23,11 +23,11 @@ def move_object_to_location(pose, x, y, z):
     rospy.loginfo("move object to the right")
     time.sleep(1)
         
-    for _ in range(15):
+    for _ in range(10):
         grasper.move_tip(x=0.1)
         time.sleep(0.1)
     
-    grasper.move_tip(x=0.15, y=0, z=0.784)
+    grasper.move_tip(x=x, y=y, z=z)
         
     rospy.loginfo("move object down")
     time.sleep(1)
@@ -42,17 +42,13 @@ def move_object_to_location(pose, x, y, z):
         
 def grasp_object(object_pose):
     
-    # rospy.init_node('object_grasper', anonymous=True)
-    
-    # sub = rospy.Subscriber('smart_grasper', String, queue_size=10)
-    
     # object_pose = Pose()
     
     # object_pose.position.x = x
     # object_pose.position.y = y
     # object_pose.position.z = z
     
-    object_pose.position.z += 0.2
+    object_pose.position.z += 0.5
     
     x_r = -pi/2.
     y_r = 0
@@ -73,7 +69,7 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     
     rospy.loginfo("move tool tip to object pose")
-    grasper.move_tip(y=-0.164)
+    grasper.move_tip(y=-0.02)
     time.sleep(0.1)
     
     rospy.loginfo("check if hand is open")
@@ -86,6 +82,7 @@ def grasp_object(object_pose):
     grasper.check_fingers_collisions(True)
     
     lift_object(object_pose)
+    move_object_to_location(pose, -0.32, 0, 0.772)
     
 def callback(data):
     rospy.loginfo('pose recevied')
@@ -109,8 +106,8 @@ if __name__ == '__main__':
     
     try:
         pose = Pose()
-        pose.position.x = -0.472
-        pose.position.y = 0.159
+        pose.position.x = 0.15
+        pose.position.y = 0
         pose.position.z = 0.772
         grasp_object(pose)
         
