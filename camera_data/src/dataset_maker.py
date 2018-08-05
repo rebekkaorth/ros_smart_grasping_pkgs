@@ -13,19 +13,36 @@ from math import pi, cos, sin
 
 bridge = CvBridge()
 
-def move_robot_around_object():
+def move_robot_around_object(pose):
     grasper = SmartGrasper()
     
-    rospy.loginfo("move robot arm around table")
-    time.sleep(1)
+    pose.position.x += 0.3
+    pose.position.y += 0.1
+    pose.position.z += 0
     
-    #rospy.loginfo("move robot to start position")
-    #grasper.move_tip(x=1.218, y=1, z=0.672)
+    x_r = -pi/2.
+    y_r = 0
+    z_r = 0
+    
+    quaternion = quaternion_from_euler(x_r, y_r, z_r)
+    pose.orientation.x = quaternion[0]
+    pose.orientation.y = quaternion[1]
+    pose.orientation.z = quaternion[2]
+    pose.orientation.w = quaternion[3]
+    
+    rospy.loginfo("move robot to start position")
+    grasper.move_tip_absolute(pose)
+    time.sleep(0.1)
+    
     
     rospy.loginfo("move robot around object")
     for _ in range(5):
+        grasper.move_tip(z=0.1)
+        time.sleep(0.1)
+        
+    rospy.loginfo("move robot around object")
+    for _ in range(6):
         grasper.move_tip(x=0.1)
-        grasper.move_tip(y=0.1)
         time.sleep(0.1)
     
 
@@ -84,8 +101,12 @@ def save_camera_info(msg):
         
         
 def save_dataset():
-    
-    move_robot_around_object()
+    # The position of the object should be known before creating the dataset
+    pose = Pose()
+    pose.position.x = 0.15
+    pose.position.y = 0
+    pose.position.z = 0.772
+    move_robot_around_object(pose)
     
     # color image topic
     image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"

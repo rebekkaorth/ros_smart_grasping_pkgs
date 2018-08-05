@@ -42,12 +42,6 @@ def move_object_to_location(pose, x, y, z):
         
 def grasp_object(object_pose):
     
-    # object_pose = Pose()
-    
-    # object_pose.position.x = x
-    # object_pose.position.y = y
-    # object_pose.position.z = z
-    
     object_pose.position.z += 0.5
     
     x_r = -pi/2.
@@ -106,8 +100,8 @@ if __name__ == '__main__':
     
     try:
         pose = Pose()
-        pose.position.x = 0.15
-        pose.position.y = 0
+        pose.position.x = -0.472
+        pose.position.y = 0.159
         pose.position.z = 0.772
         grasp_object(pose)
         
