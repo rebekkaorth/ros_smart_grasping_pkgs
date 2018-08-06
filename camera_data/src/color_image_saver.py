@@ -31,7 +31,7 @@ bridge = CvBridge()
 
 def save_color_image_callback(msg):
     
-    print("Received a color image!")
+    rospy.loginfo("Received a color image!")
     
     try:
         # Convert your ROS Image message to OpenCV2
