@@ -195,9 +195,9 @@ include_directories(
 # endif()
 
 ## Add folders to be run by python nosetests
-catkin_add_nosetests(/workspace/src/ros_smart_grasping_pkgs/camera_data/tests/color_image_saver_test.py)
+# catkin_add_nosetests(/workspace/src/ros_smart_grasping_pkgs/camera_data/tests/color_image_saver_test.py)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest(tests/color_image_saver_test.py)
+  add_rostest(test/image_saver_test.test)
 endif()

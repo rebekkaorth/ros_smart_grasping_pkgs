@@ -17,10 +17,6 @@ class ColorImageSaverTest(unittest.TestCase):
     # tests if the file as saved correctly
     def file_saving_test(self):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png'))
-    
-    # tests if node is stopped when ctrl+c is called 
-    def spin_test(self):
-        self.assertEquals(1, 1, "1!=1")
         
 
 if __name__ == '__main__':
