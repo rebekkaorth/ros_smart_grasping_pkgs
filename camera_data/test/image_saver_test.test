@@ -1,9 +1,11 @@
 <launch> 
 
+<!--
   <node pkg="camera_data" type="color_image_saver.py" name="color_image_saver" />
   <node pkg="camera_data" type="depth_image_saver.py" name="depth_image_saver" />
   <node pkg="camera_data" type="camera_info_saver.py" name="camera_info_saver" />
   <node pkg="camera_data" type="dataset_maker.py" name="dataset_maker" />
+-->
 
   <test test-name="color_image_saver_test" pkg="camera_data" type="color_image_saver_test.py" />
   <test test-name="depth_image_saver_test" pkg="camera_data" type="depth_image_saver_test.py" />

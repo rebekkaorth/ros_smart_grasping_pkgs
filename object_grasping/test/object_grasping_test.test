@@ -1,5 +1,4 @@
 <launch>
-
     <node pkg="object_grasping" type="nn_connector.py" name="nn_connector" />
     <node pkg="object_grasping" type="object_grasper.py" name="object_grasper" />
 

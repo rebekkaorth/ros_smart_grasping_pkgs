@@ -2,9 +2,8 @@
 
 # Unit test to test the color_image_saver node 
 
-package_name = 'camera_data'
-
-import sys
+import os.path, sys
+sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
 import unittest
 import os 
 
@@ -21,4 +20,4 @@ class CameraInfoSaverTest(unittest.TestCase):
 
 if __name__ == '__main__':
     import rosunit
-    rosunit.unitrun(package_name, 'camera_info_saver_test', CameraInfoSaverTest)
+    rosunit.unitrun("camera_data", 'camera_info_saver_test', CameraInfoSaverTest)

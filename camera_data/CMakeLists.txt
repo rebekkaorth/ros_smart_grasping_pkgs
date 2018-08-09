@@ -199,5 +199,8 @@ include_directories(
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest(test/image_saver_test.test)
+  catkin_add_nosetests(test/color_image_saver_test.py)
+  catkin_add_nosetests(test/depth_image_saver_test.py)
+  catkin_add_nosetests(test/camera_info_saver_test.py)
+  catkin_add_nosetests(test/dataset_maker_test.py)
 endif()

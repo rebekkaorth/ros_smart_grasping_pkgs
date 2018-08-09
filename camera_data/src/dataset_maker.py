@@ -71,7 +71,7 @@ def save_color_image(msg):
         # Save your OpenCV2 image as a png 
         cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_' + str(num_img) + '.png', color_img)
        
-    num_img += 1
+        num_img += 1
     
     except CvBridgeError, e:
         print(e)
@@ -94,7 +94,7 @@ def save_depth_image(msg):
         cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_' + str(image_number) + '.png', depth_img)
      # cited code end   
      
-    image_number += 1
+        image_number += 1
      
     except CvBridgeError, er: 
         print(er)
