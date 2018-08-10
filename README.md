@@ -121,3 +121,10 @@ The neural network itself is not yet specified and can be chosen freely. The onl
 ## Run the unit tests 
 
 ## Run the integration tests 
+
+## Author
+
+Rebekka Orth - 2312288O - 2312288O@student.gla.ac.uk
+
+## Acknowledgments 
+
