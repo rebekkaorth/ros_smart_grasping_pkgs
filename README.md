@@ -21,21 +21,23 @@ Then you have two ways to run them:
 
 Start the Shadow Robotic's simulation
 
-'''
+```
 docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox
-'''
+```
 
 Open your favorite browser and open: 
 
-'''
+```
 localhost:8080/ 
+```
 
 to see the simulation in Gazebo' 
 
 Open a new tab with 
 
-'''
+```
 localhost:8181/
+```
 
 to see the Cloud 9 IDE. 
 
