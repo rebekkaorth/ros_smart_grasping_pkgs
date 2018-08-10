@@ -11,7 +11,7 @@ https://github.com/shadow-robot/smart_grasping_sandbox.git
 
 from 29.06.2018.
 
-## Get the Docker container 
+## Get and run the Docker container 
 
 To use these packages, you first need to ensure that you have installed [Docker]() on the machine, you want to use. 
 
@@ -50,9 +50,35 @@ When you have opened the Cloud 9 tab, the terminal should have been opened alrea
 directory. And clone this directory with: 
 
 ```
-git clone 
+git clone https://github.com/rebekkaorth/ros_smart_grasping_pkgs.git
+```
 
+## Run the camera_data package
 
-## Start the container 
+The camera_data package contains files to save different information provided by the Kinect camera in separate files in the img-folder. For each of the different information that can be saved, different nodes can be ran to get the information. 
 
-## Use the simulation 
+To run the nodes ensure that you are still in the 
+
+```
+/workspace/src
+```
+
+directory. To ensure that the needed topics are available, you should check all currently available topics by calling: 
+
+```
+rostopic list
+```
+Then ensure that you find '/kinect/' topics in that list.  
+If that is the case run: 
+
+```
+rosrun camera_data <node_name>
+```
+
+Otherwise you might need to restart the simulation. 
+
+## Run the object_grasping package 
+
+## Run the unit tests 
+
+## Run the integration tests 
