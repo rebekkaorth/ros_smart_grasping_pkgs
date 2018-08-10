@@ -41,6 +41,16 @@ localhost:8181/
 
 to see the Cloud 9 IDE. 
 
+When you have opened the Cloud 9 tab, the terminal should have been opened already. Ensure that your an in the: 
+
+```
+/workspace/src
+```
+
+directory. And clone this directory with: 
+
+```
+git clone 
 
 
 ## Start the container 
