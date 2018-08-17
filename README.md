@@ -10,14 +10,32 @@ https://github.com/shadow-robot/smart_grasping_sandbox.git
 
 from 29.06.2018.
 
-## Packages Architecture 
+## Package Architecture 
 
-IMAGE OF THE SYSTEM ARCHITECTURE MODEL 
+IMAGE OF THE PACKAGE ARCHITECTURE MODEL 
   
 As shown in the model above the the system was divided into two parts. Gathering camera data and object grasping. The data gathering nodes subscribe to ROS topics published by hardware devices. The object grasping nodes publish and subscribe to data they provide on their own. Both packages are descirbed in more detail below. 
 
 ### Requirements 
 
+During a meeting with the project's supervisor the following clients and users could be defined: 
+
+  Client: CVAS group (Univeristy of Glasgow)
+  User: research students (School of Computer Science - University of Glasgow) 
+
+The requirements for the developed system were gathered in consultation with the project supervisor as well as during a conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
+
+Priorisation: 
+  Must-Have:
+  Should-Have:
+  Could_Have:
+  Would-Like-To-Have:
+  
+### User Stories 
+
+### System Architecture
+
+IMAGE OF THE SYSTEM ARCHITECUTRE IN UML 
 
 ## Get and run the Docker container 
 
