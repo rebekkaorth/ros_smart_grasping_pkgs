@@ -26,17 +26,20 @@ During a meeting with the project's supervisor the following clients and users c
 The requirements for the developed system were gathered in consultation with the project supervisor as well as during a conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
 
 Prioritisation: 
-  Must-Have:
+
+Must-Have:
     - saving color images
     - saving depth images
     - saving camera information
     - move robotic arm to a certain position
-  Should-Have:
+Should-Have:
     - connector between sandbox and neural network
-  Could_Have:
+    
+Could_Have:
     - creator of datasets
     - move robotic arm around the object
-  Would-Like-To-Have:
+    
+Would-Like-To-Have:
     - mount camera on robotic arm 
     - implementation of neural network 
   
