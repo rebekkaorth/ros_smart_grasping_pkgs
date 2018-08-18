@@ -25,17 +25,33 @@ During a meeting with the project's supervisor the following clients and users c
 
 The requirements for the developed system were gathered in consultation with the project supervisor as well as during a conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
 
-Priorisation: 
+Prioritisation: 
   Must-Have:
+    - saving color images
+    - saving depth images
+    - saving camera information
+    - move robotic arm to a certain position
   Should-Have:
+    - connector between sandbox and neural network
   Could_Have:
+    - creator of datasets
+    - move robotic arm around the object
   Would-Like-To-Have:
+    - mount camera on robotic arm 
+    - implementation of neural network 
   
 ### User Stories 
+
+
+
 
 ### System Architecture
 
 IMAGE OF THE SYSTEM ARCHITECUTRE IN UML 
+
+## Project Plan
+
+
 
 ## Get and run the Docker container 
 
@@ -138,6 +154,8 @@ If you run the object_grasper node, you need to change tabs to the Gazebo simula
 To enable smart grasping without the need to train robots on specific objects this project was aimed to provide the groundwork to combine the use of neural networks with grasp enabled robots. The nn_connector node was build to gather the needed information from a neural network and provide these to other node the execute grasps. In that context the neural network uses the data gathered by the camera_data nodes and provides pose estimations. 
 
 The neural network itself is not yet specified and can be chosen freely. The only constraints would be to use neural networks that use color images and depth images as input and provide positional vectors as an output. 
+
+## dataset_maker node (in further detail) 
 
 ## Run the unit tests 
 
