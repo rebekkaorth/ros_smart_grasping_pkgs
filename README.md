@@ -10,7 +10,9 @@ https://github.com/shadow-robot/smart_grasping_sandbox.git
 
 from 29.06.2018.
 
-## Package Architecture 
+## Project 
+
+### Package Architecture 
 
 IMAGE OF THE PACKAGE ARCHITECTURE MODEL 
   
@@ -206,7 +208,14 @@ The neural network itself is not yet specified and can be chosen freely. The onl
 
 ## dataset_maker node (in further detail) 
 
+
+
 ## Run the unit tests 
+
+The developed unit tests can be run separately as follows: 
+
+
+More detail on how to run unit tests in ROS can be found here: https://personalrobotics.ri.cmu.edu/software/unit-testing
 
 ## Run the integration tests 
 
@@ -215,4 +224,10 @@ The neural network itself is not yet specified and can be chosen freely. The onl
 Rebekka Orth - 2312288O - 2312288O@student.gla.ac.uk
 
 ## Acknowledgments 
+
+The code of the simulation and the robot comes from: 
+https://github.com/shadow-robot/smart_grasping_sandbox
+
+Shadow robotics website can be found here: 
+https://www.shadowrobot.com 
 
