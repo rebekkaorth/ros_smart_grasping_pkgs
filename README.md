@@ -45,8 +45,43 @@ Would-Like-To-Have:
   
 ### User Stories 
 
+Must-Have: 
+  
+  Title: "Color Image Saver"
+  Story: "As a user I want to run a node that saves color images as png from the object at hand in a separate directory."
+  
+  Title: "Depth Image Saver"
+  Story: "As a user I want to run a node that saves depth images as png from the object at hand in separate directory."
+  
+  Title: "Camera Info Saver"
+  Story: "As a user I want to run a node that saves camera information as txt in a separate directory"
+  
+  Title: "Object grasper"
+  Story: "As a user I wantto run a node that moves the robotic arm to the position of the object and grasps it. The arm should
+         then carry the object to a specific position"
 
 
+Should-Have:
+
+ Title: "Neural Network Connector"
+ Story: ""
+
+Could-Have:
+
+   Title: "Dataset Maker"
+   Story: "As a user I want to run a node that takes several color and depth images as well as camera information in a
+          separate directory"
+          
+   Title: "Move Around Object"
+   Story: ""
+
+Would-Like-To-Have:
+
+  Title: "Camera On Robotic Arm"
+  Story: ""
+  
+  Title: "Neural Network implemnetation"
+  Story: ""
 
 ### System Architecture
 
@@ -58,7 +93,7 @@ IMAGE OF THE SYSTEM ARCHITECUTRE IN UML
 
 ## Get and run the Docker container 
 
-To use these packages, you first need to ensure that you have installed [Docker]() on the machine, you want to use. 
+To use these packages, you first need to ensure that you have installed [Docker](https://www.docker.com) on the machine, you want to use. 
 
 Then you have two ways to run them: 
 
