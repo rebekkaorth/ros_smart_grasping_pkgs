@@ -49,15 +49,19 @@ implementation of neural network
 Must-Have: 
   
 Title: "Color Image Saver"
+
 Story: "As a user I want to run a node that saves color images as png from the object at hand in a separate directory."
   
 Title: "Depth Image Saver"
+
 Story: "As a user I want to run a node that saves depth images as png from the object at hand in separate directory."
   
 Title: "Camera Info Saver"
+
 Story: "As a user I want to run a node that saves camera information as txt in a separate directory"
   
 Title: "Object grasper"
+
 Story: "As a user I wantto run a node that moves the robotic arm to the position of the object and grasps it. The arm should
          then carry the object to a specific position"
 
@@ -65,24 +69,29 @@ Story: "As a user I wantto run a node that moves the robotic arm to the position
 Should-Have:
 
 Title: "Neural Network Connector"
-Story: ""
+
+Story: "As a user I want to run a node that uses saved images to call a neural network and publish pose predictions"
 
 Could-Have:
 
 Title: "Dataset Maker"
+
 Story: "As a user I want to run a node that takes several color and depth images as well as camera information in a
           separate directory"
           
 Title: "Move Around Object"
-Story: ""
+
+Story: "As a user I want to run a node that moves a robotic arm around an object"
 
 Would-Like-To-Have:
 
-  Title: "Camera On Robotic Arm"
-  Story: ""
+Title: "Camera On Robotic Arm"
+
+Story: "As a user I want to use a camera that is connected to a robotic arm, so it can be moved around"
   
-  Title: "Neural Network implemnetation"
-  Story: ""
+Title: "Neural Network implemnetation"
+
+Story: "As a user I want to have a neural network, that is able to predict object poses, within the sandbox"
 
 ### System Architecture
 
@@ -90,6 +99,7 @@ IMAGE OF THE SYSTEM ARCHITECUTRE IN UML
 
 ## Project Plan
 
+A detail project plan with details about what part of the project was developed when, can be found here : https://github.com/rebekkaorth/robitics_pick_n_place_masterproject/projects/1
 
 
 ## Get and run the Docker container 
