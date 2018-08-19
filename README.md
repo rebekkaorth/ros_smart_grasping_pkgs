@@ -115,7 +115,7 @@ Then you have two ways to run them:
 Start the Shadow Robotic's simulation
 
 ```
-docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox
+docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox:latest
 ```
 
 Open your favorite browser and open: 
