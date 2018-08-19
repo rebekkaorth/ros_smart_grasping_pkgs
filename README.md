@@ -28,52 +28,53 @@ The requirements for the developed system were gathered in consultation with the
 Prioritisation: 
 
 Must-Have:
-    - saving color images
-    - saving depth images
-    - saving camera information
-    - move robotic arm to a certain position
+saving color images
+saving depth images
+saving camera information
+move robotic arm to a certain position
+
 Should-Have:
-    - connector between sandbox and neural network
+connector between sandbox and neural network
     
 Could_Have:
-    - creator of datasets
-    - move robotic arm around the object
+creator of datasets
+move robotic arm around the object
     
 Would-Like-To-Have:
-    - mount camera on robotic arm 
-    - implementation of neural network 
+mount camera on robotic arm 
+implementation of neural network 
   
 ### User Stories 
 
 Must-Have: 
   
-  Title: "Color Image Saver"
-  Story: "As a user I want to run a node that saves color images as png from the object at hand in a separate directory."
+Title: "Color Image Saver"
+Story: "As a user I want to run a node that saves color images as png from the object at hand in a separate directory."
   
-  Title: "Depth Image Saver"
-  Story: "As a user I want to run a node that saves depth images as png from the object at hand in separate directory."
+Title: "Depth Image Saver"
+Story: "As a user I want to run a node that saves depth images as png from the object at hand in separate directory."
   
-  Title: "Camera Info Saver"
-  Story: "As a user I want to run a node that saves camera information as txt in a separate directory"
+Title: "Camera Info Saver"
+Story: "As a user I want to run a node that saves camera information as txt in a separate directory"
   
-  Title: "Object grasper"
-  Story: "As a user I wantto run a node that moves the robotic arm to the position of the object and grasps it. The arm should
+Title: "Object grasper"
+Story: "As a user I wantto run a node that moves the robotic arm to the position of the object and grasps it. The arm should
          then carry the object to a specific position"
 
 
 Should-Have:
 
- Title: "Neural Network Connector"
- Story: ""
+Title: "Neural Network Connector"
+Story: ""
 
 Could-Have:
 
-   Title: "Dataset Maker"
-   Story: "As a user I want to run a node that takes several color and depth images as well as camera information in a
+Title: "Dataset Maker"
+Story: "As a user I want to run a node that takes several color and depth images as well as camera information in a
           separate directory"
           
-   Title: "Move Around Object"
-   Story: ""
+Title: "Move Around Object"
+Story: ""
 
 Would-Like-To-Have:
 
