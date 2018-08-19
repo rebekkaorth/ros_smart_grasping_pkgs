@@ -30,21 +30,21 @@ The requirements for the developed system were gathered in consultation with the
 Prioritisation: 
 
 Must-Have:
-saving color images
-saving depth images
-saving camera information
-move robotic arm to a certain position
+- saving color images
+- saving depth images
+- saving camera information
+- move robotic arm to a certain position
 
 Should-Have:
-connector between sandbox and neural network
+- connector between sandbox and neural network
     
 Could_Have:
-creator of datasets
-move robotic arm around the object
+- creator of datasets
+- move robotic arm around the object
     
 Would-Like-To-Have:
-mount camera on robotic arm 
-implementation of neural network 
+- mount camera on robotic arm 
+- implementation of neural network 
   
 ### User Stories 
 
@@ -115,7 +115,7 @@ Then you have two ways to run them:
 Start the Shadow Robotic's simulation
 
 ```
-docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox:latest
+docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox
 ```
 
 Open your favorite browser and open: 
@@ -149,7 +149,7 @@ git clone https://github.com/rebekkaorth/ros_smart_grasping_pkgs.git
 2. Run the latest Docker Hub image
 
 ```
-docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 rebor94/robotic_grip_grab_shadow_robotics
+docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 rebor94/robotic_grip_grab_shadow_robotics:latest
 ```
 
 ## Run the camera_data package
@@ -207,6 +207,7 @@ To enable smart grasping without the need to train robots on specific objects th
 The neural network itself is not yet specified and can be chosen freely. The only constraints would be to use neural networks that use color images and depth images as input and provide positional vectors as an output. 
 
 ## dataset_maker node (in further detail) 
+
 
 
 
