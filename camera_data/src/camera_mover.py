@@ -13,8 +13,19 @@ from math import pi, cos, sin
 
 bridge = CvBridge()
 
-def move_robot_around_object(pose):
-    grasper = SmartGrasper()
+def move_robot_around_object(grasper):
+    
+    rospy.loginfo("move robot around object")
+    for _ in range(5):
+        grasper.move_tip(z=0.1)
+        time.sleep(0.1)
+        
+    rospy.loginfo("move robot around object")
+    for _ in range(6):
+        grasper.move_tip(x=0.1)
+        time.sleep(0.1)
+        
+def move_to_start_pose(pose, grasper): 
     
     pose.position.x += 0.3
     pose.position.y += 0.1
@@ -34,16 +45,6 @@ def move_robot_around_object(pose):
     grasper.move_tip_absolute(pose)
     time.sleep(0.1)
     
-    
-    rospy.loginfo("move robot around object")
-    for _ in range(5):
-        grasper.move_tip(z=0.1)
-        time.sleep(0.1)
-        
-    rospy.loginfo("move robot around object")
-    for _ in range(6):
-        grasper.move_tip(x=0.1)
-        time.sleep(0.1)
         
 def camera_mover():
     
@@ -52,8 +53,11 @@ def camera_mover():
     pose.position.x = 0.15
     pose.position.y = 0
     pose.position.z = 0.772
-
-    move_robot_around_object(pose)
+    
+    grasper = SmartGrasper()
+    
+    move_to_start_pose(pose, grasper)
+    move_robot_around_object(grasper)
     
     # Spin until ctrl + c
     rospy.spin()

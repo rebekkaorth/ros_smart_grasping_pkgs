@@ -15,11 +15,11 @@ from geometry_msgs.msg import Pose
 def predict_object_pose():
     # get the images taken by the camera 
     color_img = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png', 'w')
-    print("service of neural network has recevied a color image")
+    rospy.loginfo("service of neural network has recevied a color image")
     depth_img = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png', 'w')
-    print("service of neural network has recevied a depth image")
+    rospy.loginfo("service of neural network has recevied a depth image")
     camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt', 'w')
-    print("service of neural network has recevied camera information")
+    rospy.loginfo("service of neural network has recevied camera information")
     
     # call neural network and provide images as input 
     
@@ -33,9 +33,9 @@ def predict_object_pose():
     return pose
     
 
-def talker():
-    pub = rospy.Publisher('chatter', Pose, queue_size=10)
-    rospy.init_node('talker', anonymous=True)
+def posePub():
+    pub = rospy.Publisher('posePublisher', Pose, queue_size=10)
+    rospy.init_node('posePublisher', anonymous=True)
     predicted_pose = predict_object_pose()
     rate = rospy.Rate(1)
     num = 0
@@ -49,7 +49,7 @@ def talker():
 if __name__ == '__main__':
     
     try:
-        talker()
+        posePub()
     
     except rospy.ROSInterruptException:
         pass

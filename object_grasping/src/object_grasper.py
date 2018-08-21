@@ -79,7 +79,7 @@ def grasp_object(object_pose):
     move_object_to_location(pose, -0.32, 0, 0.772)
     
 def callback(data):
-    rospy.loginfo('pose recevied')
+    rospy.loginfo('pose recevied - callback')
     
     grasp_object(data)
         
@@ -88,7 +88,7 @@ def callback(data):
 def get_pose():
  
     # rospy.init_node('listener', anonymous=True)
-    pose = rospy.wait_for_message("chatter", Pose)
+    pose = rospy.wait_for_message("posePublisher", Pose)
     rospy.loginfo('pose received')
     grasp_object(pose)
     
@@ -103,9 +103,9 @@ if __name__ == '__main__':
         pose.position.x = -0.472
         pose.position.y = 0.159
         pose.position.z = 0.772
-        grasp_object(pose)
+        # grasp_object(pose)
         
-        # get_pose()
+        get_pose()
         
     except rospy.ROSInterruptException:
         pass

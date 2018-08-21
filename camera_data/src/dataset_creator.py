@@ -15,8 +15,6 @@ image_number = 0
 bridge = CvBridge()
 
 def save_color_image(msg):
-    
-    # num_img = 0
 
 # Retrieved from: 
 # https://gist.github.com/rethink-imcmahon/77a1a4d5506258f3dc1f - 19/07/2018 :
@@ -81,17 +79,17 @@ def gather_images():
     # camera info topic
     image_topic_camera_info_img = "/kinect_sim/camera1/rgb/camera_info"
     # Set up your subscriber and define its callback
-    rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=10)
+    rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=1)
     
     # color image topic
     image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"
     # Set up your subscriber and define its callback
-    rospy.Subscriber(image_topic_color_img, Image, save_color_image, queue_size=10)
+    rospy.Subscriber(image_topic_color_img, Image, save_color_image, queue_size=1)
     
     # depth image topic
     image_topic_depth_img = "/kinect_sim/camera1/depth/image_raw"
     # Set up your subscriber and define its callback
-    rospy.Subscriber(image_topic_depth_img, Image, save_depth_image, queue_size=10)
+    rospy.Subscriber(image_topic_depth_img, Image, save_depth_image, queue_size=1)
     
      # Spin until ctrl + c
     rospy.spin()
