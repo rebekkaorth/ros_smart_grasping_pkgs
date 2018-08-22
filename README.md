@@ -28,8 +28,8 @@ As shown in the model above the the system was divided into two parts. Gathering
 
 During a meeting with the project's supervisor the following clients and users could be defined: 
 
-  Client: CVAS group (Univeristy of Glasgow)
-  User: research students (School of Computer Science - University of Glasgow) 
+Client: CVAS group (Univeristy of Glasgow)
+User: research students (School of Computer Science - University of Glasgow) 
 
 The requirements for the developed system were gathered in consultation with the project supervisor as well as during a conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
 
