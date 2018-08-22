@@ -14,9 +14,13 @@ from 29.06.2018.
 
 ### Package Architecture 
 
+Path overview: 
+
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots/path_overview.png "pather overview")
 
-IMAGE OF THE PACKAGE ARCHITECTURE MODEL 
+In addition to the path overview a package architecture model has been created to give a detailed overview: 
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots/package_architecture.png "package overview")
   
 As shown in the model above the the system was divided into two parts. Gathering camera data and object grasping. The data gathering nodes subscribe to ROS topics published by hardware devices. The object grasping nodes publish and subscribe to data they provide on their own. Both packages are descirbed in more detail below. 
 
