@@ -215,12 +215,13 @@ The neural network itself is not yet specified and can be chosen freely. The onl
 
 ## Run the unit tests 
 
-The developed unit tests can be run separately as follows: 
+The developed unit tests can be run separately as follows, when you are in the "/workspace/src/" direcotry: 
 
+```
+$ nosetests -v ros_smart_grasping_pkgs/<pkg_name>/test/<file_name>
+```
 
 More detail on how to run unit tests in ROS can be found here: https://personalrobotics.ri.cmu.edu/software/unit-testing
-
-## Run the integration tests 
 
 ## Author
 
