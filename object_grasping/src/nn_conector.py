@@ -13,15 +13,18 @@ from geometry_msgs.msg import Pose
 # that uses a working neural network
 
 def predict_object_pose():
-    # get the images taken by the camera 
+    
+    # open the images taken by the camera 
     color_img = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png', 'w')
     rospy.loginfo("service of neural network has recevied a color image")
+    
     depth_img = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png', 'w')
     rospy.loginfo("service of neural network has recevied a depth image")
+    
     camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt', 'w')
     rospy.loginfo("service of neural network has recevied camera information")
     
-    # call neural network and provide images as input 
+    # CALL NEURAL NETWORK HERE AND PROVIDE IMAGES AS INPUT 
     
     # As long as the neural network is not yet implemented the following output will be returned
     # The following variables represent the (predicted) pose of the object 
@@ -34,12 +37,14 @@ def predict_object_pose():
     
 
 def posePub():
+    
     pub = rospy.Publisher('posePublisher', Pose, queue_size=10)
     rospy.init_node('posePublisher', anonymous=True)
     predicted_pose = predict_object_pose()
     rate = rospy.Rate(1)
     num = 0
-    while not rospy.is_shutdown() and num < 1:
+    
+    while not rospy.is_shutdown() and num < 10:  # gets published 10 times, so object grasper can be called and receive data
         rospy.loginfo(predicted_pose)
         pub.publish(predicted_pose)
         rate.sleep()

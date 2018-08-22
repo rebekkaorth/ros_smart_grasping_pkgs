@@ -48,6 +48,9 @@ def grasp_object(object_pose):
     y_r = 0
     z_r = 0
     
+    print("recevied pose:")
+    print(object_pose)
+    
     quaternion = quaternion_from_euler(x_r, y_r, z_r)
     object_pose.orientation.x = quaternion[0]
     object_pose.orientation.y = quaternion[1]
@@ -57,6 +60,7 @@ def grasp_object(object_pose):
     rospy.loginfo("move arm to object pose")
     grasper.move_tip_absolute(object_pose)
     time.sleep(0.1)
+    
     
     rospy.loginfo("opening hand")
     grasper.open_hand()
@@ -75,15 +79,11 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     grasper.check_fingers_collisions(True)
     
+    print("Tool tip pose at object:")
+    print(grasper.get_tip_pose())
+    
     lift_object(object_pose)
-    move_object_to_location(pose, -0.32, 0, 0.772)
-    
-def callback(data):
-    rospy.loginfo('pose recevied - callback')
-    
-    grasp_object(data)
-        
-    
+    move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
      
 def get_pose():
  
@@ -100,12 +100,12 @@ if __name__ == '__main__':
     
     try:
         pose = Pose()
-        pose.position.x = -0.472
-        pose.position.y = 0.159
-        pose.position.z = 0.772
-        # grasp_object(pose)
+        pose.position.x = 0.15
+        pose.position.y = 0
+        pose.position.z = 0.774
+        grasp_object(pose)
         
-        get_pose()
+        # get_pose()
         
     except rospy.ROSInterruptException:
         pass

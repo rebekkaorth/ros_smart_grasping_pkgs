@@ -21,6 +21,10 @@ class DatasetMakerSaverTest(unittest.TestCase):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_0.png'))
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_0.txt'))
         
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_-1.png'))
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_-1.png'))
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_-1.txt'))
+        
 
 if __name__ == '__main__':
     import rosunit

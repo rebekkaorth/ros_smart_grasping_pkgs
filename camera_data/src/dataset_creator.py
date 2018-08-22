@@ -91,7 +91,12 @@ def gather_images():
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_depth_img, Image, save_depth_image, queue_size=1)
     
-     # Spin until ctrl + c
+    # After the maximum number of images for the dataset is reached, the node is stopped
+    if image_number == 20:
+        rospy.loginfo("20 images taken for dataset")
+        rospy.is_shutdown(True) 
+    
+     # Spin until ctrl + c or image_number equals 20
     rospy.spin()
 
 if __name__ == '__main__':

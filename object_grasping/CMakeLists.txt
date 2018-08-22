@@ -194,5 +194,6 @@ include_directories(
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest(test/object_grasping_test.test)
+  catkin_add_nosetests(test/nn_conector_test.py)
+  catkin_add_nosetests(test/object_grasper_test.py)
 endif()
