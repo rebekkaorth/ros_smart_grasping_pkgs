@@ -202,16 +202,24 @@ rosrun object_grasping <node_name>
 
 If you run the object_grasper node, you need to change tabs to the Gazebo simulation to be able to see the movement of the robotic arm. 
 
+VIDEO OF OBJECT GRASPING 
+
 ## nn_connector node (in further detail) 
 
 To enable smart grasping without the need to train robots on specific objects this project was aimed to provide the groundwork to combine the use of neural networks with grasp enabled robots. The nn_connector node was build to gather the needed information from a neural network and provide these to other node the execute grasps. In that context the neural network uses the data gathered by the camera_data nodes and provides pose estimations. 
 
 The neural network itself is not yet specified and can be chosen freely. The only constraints would be to use neural networks that use color images and depth images as input and provide positional vectors as an output. 
 
-## dataset_maker node (in further detail) 
+## dataset_creator + camera_mover nodes (in further detail) 
 
+Both nodes fulfill the requirement of developing nodes that enable the creation of datasets of different objects. To save images and move the robotic arm at the same time, the functionality was split into two nodes. One node moves the camera around the object and the other node saves color- and depth-images. The nodes were developed under the assumptions that objects are placed on the table (provided by the sandbox) on the right lower corner. That enables the robotic arm to move around the corner and therefore makes it possible to take pictures of objects. Images in a ca. 90 degree angle can be taken.
+All images are saved in a separate directory in '/camera_data/imgs/dataset_images/'. 
 
+VIDEO OF CAMERA_MOVER 
 
+The assumption of the placement of objects on the table was made in order to be able to move the robotic arm at the same hieght as the object is. Would objects be placed on the floor, for example, the camera could not capture the whole object. Moreover, the robotic arm does not move around the entire table due to the length of the robotic arm. 
+
+Problem encountered: The camera has to move according to the movement of the robotic arm in order to be able to take pictures of the object at every angle. Due to the scope of the project, this issue has not been resolved. 
 
 ## Run the unit tests 
 
