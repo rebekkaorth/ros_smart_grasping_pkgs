@@ -224,7 +224,8 @@ VIDEO OF CAMERA_MOVER
 
 The assumption of the placement of objects on the table was made in order to be able to move the robotic arm at the same hieght as the object is. Would objects be placed on the floor, for example, the camera could not capture the whole object. Moreover, the robotic arm does not move around the entire table due to the length of the robotic arm. 
 
-Problem encountered: The camera has to move according to the movement of the robotic arm in order to be able to take pictures of the object at every angle. Due to the scope of the project, this issue has not been resolved. 
+Problem encountered: 
+The camera has to move according to the movement of the robotic arm in order to be able to take pictures of the object at every angle. Due to the scope of the project, this issue has not been resolved. 
 
 ## Run the unit tests 
 
