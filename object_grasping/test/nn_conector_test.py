@@ -10,7 +10,7 @@ import unittest
 import os 
 import rospy
 from geometry_msgs.msg import Pose
-from object_grasping.nn_conector import posePub
+import object_grasping
 
 class NeuralNetworkConectorTest(unittest.TestCase):
         
@@ -27,7 +27,7 @@ class NeuralNetworkConectorTest(unittest.TestCase):
     
     # publish pose of nn_conector
     def publish_pose():
-       posePub()
+       nn_conector.posePub()
     
     # subscribe to the pose published by the nn_conector 
     def subscribe_pose():

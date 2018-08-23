@@ -10,7 +10,7 @@ import unittest
 import os 
 import rospy
 from geometry_msgs.msg import Pose
-import object_grasper as obgr
+import object_grasping
 
 class ObjectGrasperTest(unittest.TestCase):
         
@@ -27,7 +27,7 @@ class ObjectGrasperTest(unittest.TestCase):
     
     # subscribe to the pose published by the nn_connector 
     def subscribe_pose():
-       return obgr.get_pose().pose  
+       return object_grasper.get_pose().pose  
     
     # test pose 
     def get_pose_for_test():
