@@ -105,7 +105,7 @@ Story: "As a user I want to have a neural network, that is able to predict objec
 ### System Architecture
 
 UML Diagram: 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots/UML_Ros_SmartGraspingPkgs.png "pather overview")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots/UML_Ros_SmartGraspingPkgs.png "UML diagram")
 
 ## Project Plan
 
@@ -190,11 +190,17 @@ Otherwise you might need to restart the simulation. The files saved by the nodes
 
 In the case of this package images are saved as .png files and information are saved as .txt files. 
 
-SCREENSHOT OF COLOR IMAGE
+Example of a saved color image:
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/color-imgs/color.png "color image")
   
-SCREENSHOT OF DEPTH IMAGE
+Example of a saved depth image: 
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/depth-imgs/depth.png "depth image")
   
-SCREENSHOT OF CAMERA INFO 
+Example of saved camera data:  
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/camera-info/camera-info.txt "camera_info")
 
 ## Run the object_grasping package 
 
