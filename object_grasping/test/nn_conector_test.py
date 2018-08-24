@@ -26,8 +26,8 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         assertEqual(self.sub_pose(), self.get_pose_for_test)
     
     # publish pose of nn_conector
-    def publish_pose():
-       nn_conector.posePub()
+    def publish_pose(self):
+        nn_conector.posePub()
     
     # subscribe to the pose published by the nn_conector 
     def subscribe_pose():
@@ -35,7 +35,7 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         return sub_pose 
     
     # test pose 
-    def get_pose_for_test():
+    def get_pose():
         pose = Pose()
         pose.position.x = 0.15
         pose.position.y = 0

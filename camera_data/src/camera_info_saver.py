@@ -9,15 +9,10 @@ from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
 import numpy as np
-
-
-# Instantiate CvBridge
-bridge = CvBridge()
         
 def save_camera_info_callback(msg):
     
-    print("camera info received!")
-    print(msg)
+    rospy.loginfo("camera info received!")
     
     camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt', 'w')
     msg_as_string = str(msg)

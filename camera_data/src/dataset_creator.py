@@ -8,8 +8,6 @@ import numpy as np
 from smart_grasping_sandbox.smart_grasper import SmartGrasper
 import time
 from geometry_msgs.msg import Pose, Point
-from tf.transformations import quaternion_from_euler
-from math import pi, cos, sin
 
 image_number = 0
 bridge = CvBridge()
@@ -64,12 +62,13 @@ def save_depth_image(msg):
         print(er)
         
 def save_camera_info(msg):
+    
     rospy.loginfo("Recieved camera info for dataset")
     
-    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_' + str(image_number)+ '.txt', 'w')
+    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_' + str(image_number) + '.txt', 'w')
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
-            
+    
     camera_info.close()
 
 def gather_images():

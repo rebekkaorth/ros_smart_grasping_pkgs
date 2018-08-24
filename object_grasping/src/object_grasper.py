@@ -67,7 +67,7 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     
     rospy.loginfo("move tool tip to object pose")
-    grasper.move_tip(y=-0.02)
+    grasper.move_tip(y=-0.13)
     time.sleep(0.1)
     
     rospy.loginfo("check if hand is open")
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     try:
         pose = Pose()
         pose.position.x = 0.15
-        pose.position.y = 0
+        pose.position.y = 0.1
         pose.position.z = 0.774
         grasp_object(pose)
         
