@@ -200,7 +200,9 @@ Example of a saved depth image:
   
 Example of saved camera data:  
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/camera-info/camera-info.txt "camera_info")
+```
+https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/camera-info/camera-info.txt
+```
 
 ## Run the object_grasping package 
 
