@@ -1,6 +1,6 @@
 # ROS Smart Grasping Packages
 
-The repository was build as part of the MSc. Master Project course for the MSc. Software Development program of the University of Glasgow in summer 2018. It contains two ROS packages that were build to be used with the [Shadow Robotics Smart Grasping Sandbox Simulation](https://www.shadowrobot.com/we-built-an-open-sandbox-for-training-robotic-hands-to-grasp-things/) (10.08.2018).This simulation is available as a Docker container and uses Cloud 9 by AWS as an built-in IDE and Gazebo as the simulation software. The packages enable users to gather camera data and use these data to execute grasps in the simulation. 
+The repository was build as part of the MSc. Master Project course for the MSc. Software Development program of the University of Glasgow in summer 2018. It contains two ROS packages that were build to be used with the [Shadow Robot Company Smart Grasping Sandbox Simulation](https://www.shadowrobot.com/we-built-an-open-sandbox-for-training-robotic-hands-to-grasp-things/) (10.08.2018).This simulation is available as a Docker container and uses Cloud 9 by AWS as an built-in IDE and Gazebo as the simulation software. The packages enable users to gather camera data and use these data to execute grasps in the simulation. 
 
 ## Development Groundwork
 
