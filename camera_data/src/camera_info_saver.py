@@ -15,6 +15,7 @@ def save_camera_info_callback(msg):
     rospy.loginfo("camera info received!")
     
     camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt', 'w')
+    print(type(msg))
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
             

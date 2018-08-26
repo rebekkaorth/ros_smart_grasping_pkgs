@@ -53,7 +53,9 @@
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>rostest</build_depend>
+  <test_depend>rostest</test_depend>
   <test_depend>rosunit</test_depend>
+  <test_depend>unittest</test_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>

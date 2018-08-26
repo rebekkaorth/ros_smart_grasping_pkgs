@@ -17,20 +17,20 @@ class ObjectGrasperTest(unittest.TestCase):
     # test if published pose by connector equals the test pose 
     def pose_published_test(self):
         self.publish_pose()
-        assertEqual(self.sub_pose(), self.get_pose_for_test)
+        assertEqual(self.sub_pose(), self.get_pose)
     
     # publish pose of nn_connector
-    def publish_pose():
+    def publish_pose(self):
         pub = rospy.Publisher('posePub', Pose, queue_size=10)
         rospy.init_node('posePub', anonymous=True)
-        pub.publish(self.get_pose_for_test)
+        pub.publish(self.get_pose)
     
     # subscribe to the pose published by the nn_connector 
-    def subscribe_pose():
+    def subscribe_pose(self):
        return object_grasper.get_pose().pose  
     
     # test pose 
-    def get_pose_for_test():
+    def get_pose(self):
         pose = Pose()
         pose.position.x = 0.15
         pose.position.y = 0
