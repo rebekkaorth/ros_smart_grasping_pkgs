@@ -67,7 +67,7 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     
     rospy.loginfo("move tool tip to object pose")
-    grasper.move_tip(y=-0.13)
+    grasper.move_tip(y=-0.19)
     time.sleep(0.1)
     
     rospy.loginfo("check if hand is open")
@@ -83,7 +83,7 @@ def grasp_object(object_pose):
     print(grasper.get_tip_pose())
     
     lift_object(object_pose)
-    move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
+    # move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
      
 def get_pose():
  
@@ -92,16 +92,17 @@ def get_pose():
     rospy.loginfo('pose received')
     grasp_object(pose)
     
-    # spin() simply keeps python from exiting until this node is stopped
+    # stops node from exiting
     rospy.spin()
 
 
 if __name__ == '__main__':
     
     try:
+        # pose for testing grasping
         pose = Pose()
         pose.position.x = 0.15
-        pose.position.y = 0.1
+        pose.position.y = 0
         pose.position.z = 0.774
         grasp_object(pose)
         

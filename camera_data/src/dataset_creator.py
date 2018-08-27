@@ -5,9 +5,8 @@ from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
-from smart_grasping_sandbox.smart_grasper import SmartGrasper
 import time
-from geometry_msgs.msg import Pose, Point
+from geometry_msgs.msg import Pose
 
 image_number = 0
 bridge = CvBridge()
@@ -33,7 +32,7 @@ def save_color_image(msg):
         color_img = bridge.imgmsg_to_cv2(msg, "bgr8")  # rgb image with red-/green-/blue-channel
         
         # Save your OpenCV2 image as a png 
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_' + str(image_number) + '.png', color_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color-image-' + str(image_number) + '.png', color_img)
        
     
     except CvBridgeError, e:
@@ -55,7 +54,7 @@ def save_depth_image(msg):
         depth_array = np.array(depth_img, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
         
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_' + str(image_number) + '.png', depth_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth-image-' + str(image_number) + '.png', depth_img)
      # cited code end  
      
     except CvBridgeError, er: 
@@ -65,7 +64,7 @@ def save_camera_info(msg):
     
     rospy.loginfo("Recieved camera info for dataset")
     
-    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_' + str(image_number) + '.txt', 'w')
+    camera_info =  open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera-info-' + str(image_number) + '.txt', 'w')
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
     
