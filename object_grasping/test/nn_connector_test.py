@@ -7,11 +7,12 @@ package_name = 'object_grasping'
 import os.path, sys
 sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
 import unittest
+import time
 import os 
 import rospy
 from geometry_msgs.msg import Pose
-from object_grasping.nn_connector import NnConnector
 
+success = False
 
 class NeuralNetworkConectorTest(unittest.TestCase):
         
@@ -22,19 +23,26 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png'))
         
     # test if published pose by connector equals the test pose 
-    def pose_published_test(self):
-        self.publish_pose()
-        assertEqual(self.sub_pose(), self.get_pose_for_test)
-    
-    # publish pose of nn_conector
-    def publish_pose(self):
-        nnc = NN_connector()
-        nnc.posePub()
-    
-    # subscribe to the pose published by the nn_conector 
-    def subscribe_pose():
-        sub_pose = rospy.wait_for_message("posePublisher", Pose)
-        return sub_pose 
+    def pose_published(self):
+         pub = rospy.Publisher('posePublisher', Pose, queue_size=10)
+         rospy.init_node('posePublisher', anonymous=True)
+         pub.publish(self.get_pose())
+
+    def callback(self, msg):
+        success = False
+        if type(msg) is geometry_msgs.msg.Pose:
+            success = True
+        return success
+        
+    def subscription_test(self):
+        rospy.init_node("poseSubscriber", anonymous=True)
+        result = rospy.Subscriber("posePublisher", Pose, self.callback)
+        timeout_sub = time.time() + 30.0
+        while not rospy.is_shutdown() and not success and not time.time() < timeout_sub:
+            time.sleep(1.0)
+            
+        self.assertTrue(result)
+        
     
     # test pose 
     def get_pose():
