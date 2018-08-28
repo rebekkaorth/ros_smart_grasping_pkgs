@@ -30,7 +30,7 @@ class ObjectGrasperTest(unittest.TestCase):
        return object_grasper.get_pose().pose  
     
     # test pose 
-    def get_pose(self):
+    def get_pose(sel):
         pose = Pose()
         pose.position.x = 0.15
         pose.position.y = 0

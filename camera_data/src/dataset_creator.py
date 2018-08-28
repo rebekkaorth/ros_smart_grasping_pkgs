@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os.path, sys
+sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
 import rospy 
 from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge, CvBridgeError
@@ -32,7 +34,7 @@ def save_color_image(msg):
         color_img = bridge.imgmsg_to_cv2(msg, "bgr8")  # rgb image with red-/green-/blue-channel
         
         # Save your OpenCV2 image as a png 
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color-image-' + str(image_number) + '.png', color_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/color-image-' + str(image_number) + '.png', color_img)
        
     
     except CvBridgeError, e:
@@ -54,8 +56,8 @@ def save_depth_image(msg):
         depth_array = np.array(depth_img, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
         
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth-image-' + str(image_number) + '.png', depth_img)
-     # cited code end  
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-' + str(image_number) + '.png', depth_img)
+    # cited code end  
      
     except CvBridgeError, er: 
         print(er)
@@ -64,20 +66,15 @@ def save_camera_info(msg):
     
     rospy.loginfo("Recieved camera info for dataset")
     
-    camera_info =  open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera-info-' + str(image_number) + '.txt', 'w')
+    camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-' + str(image_number) + '.txt', 'w')
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
-    
+            
     camera_info.close()
 
 def gather_images():
     
     rospy.init_node('dataset_creator')
-    
-    # camera info topic
-    image_topic_camera_info_img = "/kinect_sim/camera1/rgb/camera_info"
-    # Set up your subscriber and define its callback
-    rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=1)
     
     # color image topic
     image_topic_color_img = "/kinect_sim/camera1/rgb/image_raw"
@@ -89,10 +86,10 @@ def gather_images():
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_depth_img, Image, save_depth_image, queue_size=1)
     
-    # After the maximum number of images for the dataset is reached, the node is stopped
-    if image_number == 20:
-        rospy.loginfo("20 images taken for dataset")
-        rospy.is_shutdown(True) 
+    # camera info topic
+    image_topic_camera_info_img = "/kinect_sim/camera1/rgb/camera_info"
+    # Set up your subscriber and define its callback
+    rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=1)
     
      # Spin until ctrl + c or image_number equals 20
     rospy.spin()
