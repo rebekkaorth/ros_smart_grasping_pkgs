@@ -13,7 +13,7 @@ from geometry_msgs.msg import Pose
 
 # the following function and its content is merely an example and a place holder for the function
 # that uses a working neural network
-class NN_connector(): 
+class NnConnector(): 
     
     def predict_object_pose(self):
         
