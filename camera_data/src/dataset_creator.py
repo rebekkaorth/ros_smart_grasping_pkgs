@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+# node to create save images for dataset. It subscribes to three topics provided
+# by the Kinect camera: 
+#   - camera info
+#   - color images
+#   - depth images 
+# It saves all files in the same directory. 
+# It saves images until the node is stopped and gives each image number. 
+
 import os.path, sys
 sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
 import rospy 
@@ -10,7 +18,7 @@ import numpy as np
 import time
 from geometry_msgs.msg import Pose
 
-image_number = 0
+image_number = 0 
 bridge = CvBridge()
 
 def save_color_image(msg):
@@ -52,6 +60,7 @@ def save_depth_image(msg):
         global image_number
         image_number += 1
         
+        # change received data to depth image
         depth_img = bridge.imgmsg_to_cv2(msg,"passthrough")
         depth_array = np.array(depth_img, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
@@ -66,6 +75,7 @@ def save_camera_info(msg):
     
     rospy.loginfo("Recieved camera info for dataset")
     
+    # create new txt file for camera information
     camera_info = open('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-' + str(image_number) + '.txt', 'w')
     msg_as_string = str(msg)
     camera_info.write(msg_as_string)
@@ -74,6 +84,7 @@ def save_camera_info(msg):
 
 def gather_images():
     
+    # name of the node
     rospy.init_node('dataset_creator')
     
     # color image topic
@@ -91,7 +102,7 @@ def gather_images():
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_camera_info_img, CameraInfo, save_camera_info, queue_size=1)
     
-     # Spin until ctrl + c or image_number equals 20
+     # prevents node from stopping before ctrl + c is pressed
     rospy.spin()
 
 if __name__ == '__main__':

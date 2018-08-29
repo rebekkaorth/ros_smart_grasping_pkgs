@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# node to save depth images. The node subscribes to a topic published by the 
+# Kinect camera that porvides depth images. It converts the received data into
+# depth image png files. The code citied from other sources is clearly stated 
+# below.
+
 # rospy for the subscriber
 import rospy
 import numpy as np
@@ -9,7 +14,6 @@ from sensor_msgs.msg import Image, PointCloud2
 from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
-
 
 
 # Instantiate CvBridge
@@ -23,6 +27,7 @@ def save_depth_image_callback(msg):
     # Retrieved from: https://answers.ros.org/question/255413/unable-to-store-the-depth-map-in-32fc1-format/ - 24/07/2018
     # Username: Joy16
     try:
+        # convert recevied data to png file
         NewImg = bridge.imgmsg_to_cv2(msg,"passthrough")
         depth_array = np.array(NewImg, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
@@ -35,6 +40,7 @@ def save_depth_image_callback(msg):
 
 
 def save_image():
+    # name of the nocde
     rospy.init_node('depth_image_listener')
     
     # Define your image topic
@@ -44,7 +50,7 @@ def save_image():
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic_color_img, Image, save_depth_image_callback, queue_size=1)
 
-    # Spin until ctrl + c
+    # prevents node from stopping before ctrl + c is pressed
     rospy.spin()
 
 if __name__ == '__main__':
