@@ -22,7 +22,7 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png'))
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png'))
         
-    # test if published pose by connector equals the test pose 
+    # publish sample pose 
     def pose_published(self):
          pub = rospy.Publisher('posePublisher', Pose, queue_size=10)
          rospy.init_node('posePublisher', anonymous=True)
@@ -33,7 +33,8 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         if type(msg) is geometry_msgs.msg.Pose:
             success = True
         return success
-        
+    
+    # test if published pose is equal to sample pose 
     def subscription_test(self):
         rospy.init_node("poseSubscriber", anonymous=True)
         result = rospy.Subscriber("posePublisher", Pose, self.callback)
@@ -44,7 +45,7 @@ class NeuralNetworkConectorTest(unittest.TestCase):
         self.assertTrue(result)
         
     
-    # test pose 
+    # sample pose 
     def get_pose():
         pose = Pose()
         pose.position.x = 0.15

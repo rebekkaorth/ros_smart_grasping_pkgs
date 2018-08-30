@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-# Unit test to test the color_image_saver node 
+# Unit test to test the dataset_creator node.
+# It tests the presence of the saving path as well as if a fie was saved in 
+# that directory.
+# It also tests the subscription to the Kinect camera topic in terms of if the
+# correct object is recevied. 
 
 package_name = 'camera_data'
 
@@ -35,35 +39,40 @@ class DatasetMakerSaverTest(unittest.TestCase):
         
     def callback_color(self, msg):
         success_color = False
-        if type(msg) is sensor_msgs.msg._Image.Image:
+        if type(msg) is sensor_msgs.msg._Image.Image: # test if correct object is received
             success = True
         return success_color
     
     def callback_depth(self, msg):
         success_depth = False
-        if type(msg) is sensor_msgs.msg._Image.Image:
+        if type(msg) is sensor_msgs.msg._Image.Image:  # test if correct object is received
             success = True
         return success_depth
         
     def callback_info(self, msg):
         success_info = False
-        if type(msg) is sensor_msgs.msg._Image.Image:
+        if type(msg) is sensor_msgs.msg._Image.Image:  # test if correct object is received
             success = True
         return success_info
     
     def subscription_test(self):
+        # node name
         rospy.init_node("color_img_sub_test", anonymous=True)
+        
+        # test if subscription return Image object (for color images)
         result_color = rospy.Subscriber("/kinect_sim/camera1/rgb/image_raw", Image, self.callback_color)
         timeout_sub = time.time() + 20.0
         while not rospy.is_shutdown() and not success_color and not time.time() < timeout_sub:
             time.sleep(1.0)
         self.assertTrue(result_color)
         
+        # test if subscription return Image object (for depth images)
         result_depth = rospy.Subscriber("/kinect_sim/camera1/depth/image_raw", Image, self.callback_depth)
         while not rospy.is_shutdown() and not success_depth and not time.time() < timeout_sub:
             time.sleep(1.0)
         self.assertTrue(result_depth)
         
+        # test if subscription return CameraInfo object 
         result_info = rospy.Subscriber("/kinect_sim/camera1/rgb/camera_info", CameraInfo, self.callback_info)
         while not rospy.is_shutdown() and not success_info and not time.time() < timeout_sub:
             time.sleep(1.0)

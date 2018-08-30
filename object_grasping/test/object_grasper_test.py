@@ -23,7 +23,8 @@ class ObjectGrasperTest(unittest.TestCase):
         if type(msg) is geometry_msgs.msg.Pose:
             success = True
         return success
-        
+    
+    # test if subscription works and if the correct Pose is returned
     def subscription_test(self):
         rospy.init_node("poseSubscriber", anonymous=True)
         result = rospy.Subscriber("posePublisher", Pose, self.callback)
@@ -33,7 +34,7 @@ class ObjectGrasperTest(unittest.TestCase):
             
         self.assertTrue(result)
     
-    # test pose 
+    # sample pose 
     def get_pose(self):
         pose = Pose()
         pose.position.x = 0.15

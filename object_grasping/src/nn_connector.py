@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 
-# this services uses output of:
+# node that connects the neural network with the simulation.
+# if a neural network is implemented it takes the saved images and provides them
+# to the neural network as input. It then converts the neural network's output 
+# to a Pose-object that it publishes. 
+
+# This node uses output of:
 #   color_image_svaer.py
 #   depth_image_saver.py
 #   camera_info_saver.py 
 # in order to use this service properly these nodes need to be run first
+
+# Since no neural network is implemented yet, it provides a pre-defined pose as 
+# an example
 
 import os.path, sys
 sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
@@ -41,12 +49,17 @@ class NnConnector():
     
     def posePub(self):
         
+        # node name
+        rospy.init_node('nn-connector')
+        
+        # publish pose 
         pub = rospy.Publisher('posePublisher', Pose, queue_size=10)
         rospy.init_node('posePublisher', anonymous=True)
         predicted_pose = self.predict_object_pose()
         rate = rospy.Rate(1)
         num = 0
         
+        # publish pose 10 times
         while not rospy.is_shutdown() and num < 10:  # gets published 10 times, so object grasper can be called and receive data
             rospy.loginfo(predicted_pose)
             pub.publish(predicted_pose)

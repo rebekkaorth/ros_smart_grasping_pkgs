@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-# Unit test to test the color_image_saver node 
+# Unit test to test the cmaera_info_saver node. 
+# It tests the presence of the saving path as well as if a fie was saved in 
+# that directory.
+# It also tests the subscription to the Kinect camera topic in terms of if the
+# correct object is recevied. 
 
 import os.path, sys
 sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
@@ -18,7 +22,7 @@ class CameraInfoSaverTest(unittest.TestCase):
     def path_correctness_test(self):
         self.assertTrue(os.path.isdir('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info'))
         
-    # tests if the file as saved correctly
+    # tests if the file ss saved correctly
     def file_saving_test(self):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/camera-info/camera-info.txt'))
         
@@ -27,7 +31,8 @@ class CameraInfoSaverTest(unittest.TestCase):
         if type(msg) is sensor_msgs.msg._CameraInfo.CameraInfo:
             success = True
         return success
-        
+    
+    # test if the subscription returns the correct object
     def subscription_test(self):
         rospy.init_node("cam_info_sub_test", anonymous=True)
         result = rospy.Subscriber("/kinect_sim/camera1/rgb/camera_info", CameraInfo, self.callback)

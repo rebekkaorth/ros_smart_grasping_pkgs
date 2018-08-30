@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-# Unit test to test the color_image_saver node 
+# Unit test to test the depth_image_saver node.
+# It tests the presence of the saving path as well as if a fie was saved in 
+# that directory.
+# It also tests the subscription to the Kinect camera topic in terms of if the
+# correct object is recevied.
 
 package_name = 'camera_data'
 
@@ -30,7 +34,8 @@ class DepthImageSaverTest(unittest.TestCase):
         if type(msg) is sensor_msgs.msg._Image.Image:
             success = True
         return success
-        
+    
+    # test if subscription returns Image object    
     def subscription_test(self):
         rospy.init_node("color_img_sub_test", anonymous=True)
         result = rospy.Subscriber("/kinect_sim/camera1/rgb/image_raw", Image, self.callback)

@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# node to grasp objects and place them at a given point based on a Pose-object
+# received by the nn_connector node. 
+
 import rospy
 from smart_grasping_sandbox.smart_grasper import SmartGrasper
 import time
@@ -12,8 +15,10 @@ grasper = SmartGrasper()
 def lift_object(pose): 
     
     rospy.loginfo("lift object up")
+    
     time.sleep(1)
     
+    # lift robotic arm up
     for _ in range(10):
         grasper.move_tip(y=0.1)
         time.sleep(0.1)
@@ -22,50 +27,55 @@ def move_object_to_location(pose, x, y, z):
     
     rospy.loginfo("move object to the right")
     time.sleep(1)
-        
+    
+    # move robotic arm to the the left    
     for _ in range(10):
         grasper.move_tip(x=0.1)
         time.sleep(0.1)
     
+    # move robotic arm to a given position
     grasper.move_tip(x=x, y=y, z=z)
         
     rospy.loginfo("move object down")
     time.sleep(1)
-        
+    
+    # move robotic arm down    
     for _ in range(10):
         grasper.move_tip(y=-0.1)
         time.sleep(0.1)
-        
+    
+    # release object by opening robotic hand    
     grasper.open_hand()
     grasper.check_fingers_collisions(False)
     
         
 def grasp_object(object_pose):
     
+    # set z pose higher to prevent collisions
     object_pose.position.z += 0.5
     
     x_r = -pi/2.
     y_r = 0
     z_r = 0
     
-    print("recevied pose:")
-    print(object_pose)
-    
+    # calculate quaternions for orientation values
     quaternion = quaternion_from_euler(x_r, y_r, z_r)
     object_pose.orientation.x = quaternion[0]
     object_pose.orientation.y = quaternion[1]
     object_pose.orientation.z = quaternion[2]
     object_pose.orientation.w = quaternion[3]
     
+    # move robotic arm to object pose
     rospy.loginfo("move arm to object pose")
     grasper.move_tip_absolute(object_pose)
     time.sleep(0.1)
     
-    
+    # open hand to enable grasp
     rospy.loginfo("opening hand")
     grasper.open_hand()
     time.sleep(0.1)
     
+    # move down to close fingers around object
     rospy.loginfo("move tool tip to object pose")
     grasper.move_tip(y=-0.18)
     time.sleep(0.1)
@@ -79,15 +89,13 @@ def grasp_object(object_pose):
     time.sleep(0.1)
     grasper.check_fingers_collisions(True)
     
-    print("Tool tip pose at object:")
-    print(grasper.get_tip_pose())
-    
     lift_object(object_pose)
-    # move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
+    
+    move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
      
 def get_pose():
  
-    # rospy.init_node('listener', anonymous=True)
+    # waits for message from nn_connector 
     pose = rospy.wait_for_message("posePublisher", Pose)
     rospy.loginfo('pose received')
     grasp_object(pose)
@@ -100,13 +108,13 @@ if __name__ == '__main__':
     
     try:
         # pose for testing grasping
-        pose = Pose()
-        pose.position.x = -0.2
-        pose.position.y = 0
-        pose.position.z = 0.8
-        grasp_object(pose)
+        # pose = Pose()
+        # pose.position.x = 0.15
+        # pose.position.y = 0
+        # pose.position.z = 0.772
+        # grasp_object(pose)
         
-        # get_pose()
+        get_pose()
         
     except rospy.ROSInterruptException:
         pass
