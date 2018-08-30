@@ -24,7 +24,7 @@ from 29.06.2018.
 
 Path overview: 
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/pathe_overview.png "pather overview")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/path_overview.png "pather overview")
 
 In addition to the path overview a package architecture model has been created to give a detailed overview: 
 
