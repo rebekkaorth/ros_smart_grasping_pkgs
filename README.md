@@ -217,7 +217,9 @@ Example of saved camera data:
 https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/imgs/camera-info/camera-info.txt
 ```
 
-## Run the object_grasping package 
+## Nodes further explained
+
+### Run the object_grasping package 
 
 The grasping package contains two nodes. One node calls a neural network to gather information about pose estimations and about objects in the scene, using images as input the Kinect camera captures. It then publishes its estimation as Pose objects. The other node subscribes to these published pose objects and uses these to grasp the objects in the scene. It does so by using the SmartGrasper library provided by Shadow Roboitcs. 
 
@@ -229,13 +231,13 @@ rosrun object_grasping <node_name>
 
 If you run the object_grasper node, you need to change tabs to the Gazebo simulation to be able to see the movement of the robotic arm. 
 
-## nn_connector node (in further detail) 
+### nn_connector node (in further detail) 
 
 To enable smart grasping without the need to train robots on specific objects this project was aimed to provide the groundwork to combine the use of neural networks with robots. The nn_connector node was build to gather the input a neural network needs and to provide its output to the object_grasper node that execute grasps.  
 
 The neural network itself is not yet implemented. Which means, so far the nn_connector nodes provides all functionalities but the call of the neural network's functions.  
 
-## dataset_creator + camera_mover nodes (in further detail) 
+### dataset_creator + camera_mover nodes (in further detail) 
 
 Both nodes fulfill the requirement of developing nodes that enable the creation of datasets of different objects. To save images and move the robotic arm at the same time, the functionality was split into two nodes. One node moves the camera around the object and the other node saves color- and depth-images. The nodes were developed under the assumptions that objects are placed on the table (provided by the sandbox) on the right lower corner. That enables the robotic arm to move around the corner and therefore makes it possible to take pictures of objects. Images in a ca. 90 degree angle can be taken.
 All images are saved in a separate directory in '/camera_data/imgs/dataset_images/'. 
