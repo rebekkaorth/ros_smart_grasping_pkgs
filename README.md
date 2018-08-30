@@ -113,7 +113,7 @@ Story: "As a user I want to have a neural network, that is able to predict objec
 ### System Architecture
 
 UML Diagram: 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots/UML_Ros_SmartGraspingPkgs.png "UML diagram")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/UML_Ros_SmartGraspingPkgs.png "UML diagram")
 
 ## Project Plan
 
