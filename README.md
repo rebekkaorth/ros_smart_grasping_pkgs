@@ -24,11 +24,11 @@ from 29.06.2018.
 
 Path overview: 
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/path_overview.png "pather overview")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/pathe_overview.png "pather overview")
 
 In addition to the path overview a package architecture model has been created to give a detailed overview: 
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/package_overview.png "package overview")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/pathe_overview.png "package overview")
   
 As shown in the model above the the system was divided into two parts. Gathering camera data and object grasping. The data gathering nodes subscribe to ROS topics published by hardware devices. The object grasping nodes publish and subscribe to data they provide on their own. Both packages are descirbed in more detail below. 
 
@@ -253,9 +253,21 @@ $ nosetests -v ros_smart_grasping_pkgs/<pkg_name>/test/<file_name>
 More detail on how to run unit tests in ROS can be found here: https://personalrobotics.ri.cmu.edu/software/unit-testing
 
 ## Problems encountered during the development 
-To fulfil one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "gerardo". Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
+To fulfill one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "camera-change-03-09-18". Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
 
-In addition to that problem, when starting the simulation, several collision files cannot be loaded plus the smart_grasping_sandbox cannot be loaded. This results in the simulation not loading properly from time to time as well as the missing collision detection of the robotic arm. This also results in the sometimes unconventional behaviour of the robot. For example, the motion plans of the robotic arm do not take the shortest way and sometimes result in the robotic arm moving into the simulated wall/ floor. Furthermore, sometimes the Kinect topics are not available​ when starting​ the simulation. This results in the inability to save colour​-/ depth images. If that happens, the simulation needs to be restarted. 
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/camera_mounted_on_arm.png "camera mounted on robotic arm")
+
+In addition to that problem, when starting the simulation, several collision files cannot be loaded plus the smart_grasping_sandbox cannot be loaded. This results in the simulation not loading properly from time to time as well as the missing collision detection of the robotic arm. 
+
+![alt tag] (https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning_Collision.png "collision files are not loaded")
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail.png "robotic arm fail")
+
+This also results in the sometimes unconventional behaviour of the robot. For example, the motion plans of the robotic arm do not take the shortest way and sometimes result in the robotic arm moving into the simulated wall/ floor. Furthermore, sometimes the Kinect topics are not available​ when starting​ the simulation. This results in the inability to save colour​-/ depth images. If that happens, the simulation needs to be restarted. 
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning-Error.png "smart_grasping_sandbox not loaded")
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail_2.png "robotic arm fail")
 
 ## Author
 
