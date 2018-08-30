@@ -259,7 +259,7 @@ To fulfill one requirement of the project, an attempt to change the position of 
 
 In addition to that problem, when starting the simulation, several collision files cannot be loaded plus the smart_grasping_sandbox cannot be loaded. This results in the simulation not loading properly from time to time as well as the missing collision detection of the robotic arm. 
 
-![alt tag] (https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning_Collision.png "collision files are not loaded")
+![alt tag]  (https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning_Collision.png "collision files are not loaded")
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail.png "robotic arm fail")
 
