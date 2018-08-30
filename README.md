@@ -34,13 +34,13 @@ As shown in the model above the the system was divided into two parts. Gathering
 
 ### Requirements 
 
-During a meeting with the project's supervisor the following clients and users could be defined: 
+The following clients and users could be defined: 
 
 Client: CVAS group (Univeristy of Glasgow)
 
 User: research students (School of Computer Science - University of Glasgow) 
 
-The requirements for the developed system were gathered in consultation with the project supervisor as well as during a conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
+The requirements for the developed system were gathered in consultation with the project supervisor as well as during the conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
 
 Prioritisation: 
 
@@ -236,9 +236,6 @@ The neural network itself is not yet specified and can be chosen freely. The onl
 
 Both nodes fulfill the requirement of developing nodes that enable the creation of datasets of different objects. To save images and move the robotic arm at the same time, the functionality was split into two nodes. One node moves the camera around the object and the other node saves color- and depth-images. The nodes were developed under the assumptions that objects are placed on the table (provided by the sandbox) on the right lower corner. That enables the robotic arm to move around the corner and therefore makes it possible to take pictures of objects. Images in a ca. 90 degree angle can be taken.
 All images are saved in a separate directory in '/camera_data/imgs/dataset_images/'. 
-
-[![Watch the video](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/camera_mounted_on_arm.png)](https://www.youtube.com/watch?v=aZWng_-hDBo)
-
 
 The assumption of the placement of objects on the table was made in order to be able to move the robotic arm at the same hieght as the object is. Would objects be placed on the floor, for example, the camera could not capture the whole object. Moreover, the robotic arm does not move around the entire table due to the length of the robotic arm. 
 
