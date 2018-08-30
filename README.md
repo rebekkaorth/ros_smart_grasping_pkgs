@@ -1,8 +1,8 @@
 # ROS Smart Grasping Packages
 
-The repository was build as part of the MSc. Master Project course for the MSc. Software Development program of the University of Glasgow in summer 2018. It contains two ROS packages that were build to be used with the [Shadow Robot Company Smart Grasping Sandbox Simulation](https://www.shadowrobot.com/we-built-an-open-sandbox-for-training-robotic-hands-to-grasp-things/) (10.08.2018).This simulation is available as a Docker container and uses Cloud 9 by AWS as an built-in IDE and Gazebo as the simulation software. The packages enable users to gather camera data and use these data to execute grasps in the simulation. 
+This repository was build as part of the MSc. Master Project course for the MSc. Software Development program of the University of Glasgow in summer 2018. It contains two ROS packages that were build to be used with the [Shadow Robot Company Smart Grasping Sandbox Simulation](https://www.shadowrobot.com/we-built-an-open-sandbox-for-training-robotic-hands-to-grasp-things/) (10.08.2018).This simulation is available as a Docker container and uses Cloud 9 by AWS as an built-in IDE and Gazebo as the simulation software. The packages enable users to gather camera data and use these data to execute grasps in the simulation. 
 
-Components used: 
+### Components used
 
 Python 2.7.6
 
@@ -24,13 +24,13 @@ from 29.06.2018.
 
 Path overview: 
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/path_overview.png "pather overview")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/path_overview.png "path overview")
 
 In addition to the path overview a package architecture model has been created to give a detailed overview: 
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/Node_design.png "node design")
   
-As shown in the model above the the system was divided into two parts. Gathering camera data and object grasping. The data gathering nodes subscribe to ROS topics published by hardware devices. The object grasping nodes publish and subscribe to data they provide on their own. Both packages are descirbed in more detail below. 
+As shown in the model above the the system was divided into two parts. Gathering camera data and object grasping. The data gathering nodes subscribe to ROS topics published by hardware devices. The object grasping nodes publish and subscribe to data they provide on their own. Both packages are described in more detail below. 
 
 ### Requirements 
 
@@ -38,9 +38,9 @@ The following clients and users could be defined:
 
 Client: CVAS group (Univeristy of Glasgow)
 
-User: research students (School of Computer Science - University of Glasgow) 
+Users: research students (School of Computer Science - University of Glasgow) 
 
-The requirements for the developed system were gathered in consultation with the project supervisor as well as during the conducted research regarding the needed specifications of such a system. With the client and future user in mind, the following requirements could be worked out: 
+The requirements for the developed system were gathered in consultation with the project supervisor as well as during the conducted research regarding the needed specifications of such a system. With the client and future users in mind, the following requirements could be worked out: 
 
 Prioritisation: 
 
@@ -112,6 +112,9 @@ Story: "As a user I want to have a neural network, that is able to predict objec
 
 ### System Architecture
 
+Based on the above mention user stories, the system architecture was developed. 
+Due to already gathered knowledge in that language, all nodes were written in Python.
+
 UML Diagram: 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/UML_Ros_SmartGraspingPkgs.png "UML diagram")
 
@@ -162,7 +165,7 @@ directory. And clone this directory with:
 git clone https://github.com/rebekkaorth/ros_smart_grasping_pkgs.git
 ```
 
-2. Run the latest Docker Hub image
+2. Run the latest Docker Hub image 
 
 ```
 docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 rebor94/robotic_grip_grab_shadow_robotics:latest
@@ -190,13 +193,15 @@ If that is the case run:
 rosrun camera_data <node_name>
 ```
 
-Otherwise you might need to restart the simulation. The files saved by the nodes in the camera_data package can be found in the following directory: 
+Otherwise you might need to restart the simulation. 
+
+The files saved by the nodes in the camera_data package can be found in the following directory: 
 
 ```
 /workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/
 ```
 
-In the case of this package images are saved as .png files and information are saved as .txt files. 
+In the case of this package, images are saved as .png files and camera information are saved as .txt files. 
 
 Example of a saved color image:
 
@@ -214,7 +219,7 @@ https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/camera_data/i
 
 ## Run the object_grasping package 
 
-The grasping package contains two nodes. One node calls a neural network to gather information about pose estimations about objects in the scene the Kinect camera captures. It then publishes there estimation as Pose objects. The other node subscribes to these published pose estimations and uses these grasp the objects in the scene. It therefore uses the SmartGrasper library provided by Shadow Roboitcs. 
+The grasping package contains two nodes. One node calls a neural network to gather information about pose estimations and about objects in the scene, using images as input the Kinect camera captures. It then publishes its estimation as Pose objects. The other node subscribes to these published pose objects and uses these to grasp the objects in the scene. It does so by using the SmartGrasper library provided by Shadow Roboitcs. 
 
 To run one of the nodes use: 
 
@@ -224,13 +229,11 @@ rosrun object_grasping <node_name>
 
 If you run the object_grasper node, you need to change tabs to the Gazebo simulation to be able to see the movement of the robotic arm. 
 
-VIDEO OF OBJECT GRASPING 
-
 ## nn_connector node (in further detail) 
 
-To enable smart grasping without the need to train robots on specific objects this project was aimed to provide the groundwork to combine the use of neural networks with grasp enabled robots. The nn_connector node was build to gather the needed information from a neural network and provide these to other node the execute grasps. In that context the neural network uses the data gathered by the camera_data nodes and provides pose estimations. 
+To enable smart grasping without the need to train robots on specific objects this project was aimed to provide the groundwork to combine the use of neural networks with robots. The nn_connector node was build to gather the input a neural network needs and to provide its output to the object_grasper node that execute grasps.  
 
-The neural network itself is not yet specified and can be chosen freely. The only constraints would be to use neural networks that use color images and depth images as input and provide positional vectors as an output. 
+The neural network itself is not yet implemented. Which means, so far the nn_connector nodes provides all functionalities but the call of the neural network's functions.  
 
 ## dataset_creator + camera_mover nodes (in further detail) 
 
@@ -253,7 +256,9 @@ $ nosetests -v ros_smart_grasping_pkgs/<pkg_name>/test/<file_name>
 More detail on how to run unit tests in ROS can be found here: https://personalrobotics.ri.cmu.edu/software/unit-testing
 
 ## Problems encountered during the development 
-To fulfill one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "camera-change-03-09-18". Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
+To fulfill one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "camera-change-03-09-18" (![Docker Image] (https://hub.docker.com/r/rebor94/robotic_grip_grab_shadow_robotics/tags/). Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
+
+This screenshot shows the latest status of that image: 
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/camera_mounted_on_arm.png "camera mounted on robotic arm")
 
@@ -261,13 +266,13 @@ In addition to that problem, when starting the simulation, several collision fil
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning_Collision.png "collision files not loaded")
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail.png "robotic arm fail")
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning-Error.png "smart_grasping_sandbox not loaded")
 
 This also results in the sometimes unconventional behaviour of the robot. For example, the motion plans of the robotic arm do not take the shortest way and sometimes result in the robotic arm moving into the simulated wall/ floor. Furthermore, sometimes the Kinect topics are not available​ when starting​ the simulation. This results in the inability to save colour​-/ depth images. If that happens, the simulation needs to be restarted. 
 
-![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/MotionPlanning-Error.png "smart_grasping_sandbox not loaded")
-
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail_2.png "robotic arm fail")
+
+![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail.png "robotic arm fail")
 
 ## Author
 
