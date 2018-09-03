@@ -100,13 +100,13 @@ if __name__ == '__main__':
     
     try:
         # pose for testing grasping
-        pose = Pose()
-        pose.position.x = 0.15
-        pose.position.y = 0
-        pose.position.z = 0.772
-        grasp_object(pose)
+        # pose = Pose()
+        # pose.position.x = 0.15
+        # pose.position.y = 0
+        # pose.position.z = 0.772
+        # grasp_object(pose)
         
-        # get_pose()
+        get_pose()
         
     except rospy.ROSInterruptException:
         pass

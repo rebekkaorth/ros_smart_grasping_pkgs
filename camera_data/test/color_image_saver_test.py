@@ -30,6 +30,7 @@ class ColorImageSaverTest(unittest.TestCase):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/color-imgs/color.png'))
         
     def callback(self, msg):
+        global sensor_msgs
         success = False
         if type(msg) is sensor_msgs.msg._Image.Image:
             success = True

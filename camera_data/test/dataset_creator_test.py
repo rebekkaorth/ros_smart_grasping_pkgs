@@ -32,7 +32,7 @@ class DatasetMakerSaverTest(unittest.TestCase):
     def file_saving_test(self):
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/color-image-1.png'))
         self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-1.png'))
-        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-0.txt'))
+        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-1.txt'))
         
         self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/color-image-01.png'))
         self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-01.png'))
@@ -46,12 +46,14 @@ class DatasetMakerSaverTest(unittest.TestCase):
         return success_color
     
     def callback_depth(self, msg):
+        global sensor_msgs
         success_depth = False
         if type(msg) is sensor_msgs.msg._Image.Image:  # test if correct object is received
             success = True
         return success_depth
         
     def callback_info(self, msg):
+        global sensor_msgs
         success_info = False
         if type(msg) is sensor_msgs.msg._CameraInfo.CameraInfo:  # test if correct object is received
             success = True
