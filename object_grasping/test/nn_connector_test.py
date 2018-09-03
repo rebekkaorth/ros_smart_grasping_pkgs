@@ -38,8 +38,8 @@ class NeuralNetworkConectorTest(unittest.TestCase):
     def subscription_test(self):
         rospy.init_node("poseSubscriber", anonymous=True)
         result = rospy.Subscriber("posePublisher", Pose, self.callback)
-        timeout_sub = time.time() + 30.0
-        while not rospy.is_shutdown() and not success and not time.time() < timeout_sub:
+        time_sub = time.time() + 30.0
+        while not rospy.is_shutdown() and not success and not time.time() < time_sub:
             time.sleep(1.0)
             
         self.assertTrue(result)

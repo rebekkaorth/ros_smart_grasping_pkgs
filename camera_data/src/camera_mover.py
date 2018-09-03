@@ -12,8 +12,8 @@ from smart_grasping_sandbox.smart_grasper import SmartGrasper
 from geometry_msgs.msg import Pose
 from tf.transformations import quaternion_from_euler
 from math import pi, cos, sin
+import time
 
-bridge = CvBridge()
 
 def move_robot_around_object(grasper):
     

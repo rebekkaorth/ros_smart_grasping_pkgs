@@ -13,7 +13,8 @@ sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
 import rostest
 import rospy
 import time
-from sensor_msgs.msg import CameraInfo, Image
+from sensor_msgs.msg import CameraInfo
+from sensor_msgs.msg import Image
 import unittest
 import os 
 
@@ -25,20 +26,21 @@ class DatasetMakerSaverTest(unittest.TestCase):
     
     # tests if the path the file is supposed to be saved at exists 
     def path_correctness_test(self):
-        self.assertTrue(os.path.isdir('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images'))
+        self.assertTrue(os.path.isdir('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images'))
         
     # tests if the file as saved correctly
     def file_saving_test(self):
-        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_0.png'))
-        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_0.png'))
-        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_0.txt'))
+        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/color-image-1.png'))
+        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-1.png'))
+        self.assertTrue(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-0.txt'))
         
-        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/color_image_-1.png'))
-        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/depth_image_-1.png'))
-        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset_images/camera_info_-1.txt'))
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/color-image-01.png'))
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-01.png'))
+        self.assertFalse(os.path.isfile('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/camera-info-01.txt'))
         
     def callback_color(self, msg):
         success_color = False
+        global sensor_msgs
         if type(msg) is sensor_msgs.msg._Image.Image: # test if correct object is received
             success = True
         return success_color
@@ -51,7 +53,7 @@ class DatasetMakerSaverTest(unittest.TestCase):
         
     def callback_info(self, msg):
         success_info = False
-        if type(msg) is sensor_msgs.msg._Image.Image:  # test if correct object is received
+        if type(msg) is sensor_msgs.msg._CameraInfo.CameraInfo:  # test if correct object is received
             success = True
         return success_info
     

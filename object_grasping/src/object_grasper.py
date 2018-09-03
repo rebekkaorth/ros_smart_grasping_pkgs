@@ -16,14 +16,12 @@ def lift_object(pose):
     
     rospy.loginfo("lift object up")
     
-    time.sleep(1)
-    
     # lift robotic arm up
-    for _ in range(10):
+    for _ in range(12):
         grasper.move_tip(y=0.1)
         time.sleep(0.1)
     
-def move_object_to_location(pose, x, y, z):
+def move_object_to_location(pose):
     
     rospy.loginfo("move object to the right")
     time.sleep(1)
@@ -32,9 +30,6 @@ def move_object_to_location(pose, x, y, z):
     for _ in range(10):
         grasper.move_tip(x=0.1)
         time.sleep(0.1)
-    
-    # move robotic arm to a given position
-    grasper.move_tip(x=x, y=y, z=z)
         
     rospy.loginfo("move object down")
     time.sleep(1)
@@ -68,21 +63,18 @@ def grasp_object(object_pose):
     # move robotic arm to object pose
     rospy.loginfo("move arm to object pose")
     grasper.move_tip_absolute(object_pose)
-    time.sleep(0.1)
     
     # open hand to enable grasp
     rospy.loginfo("opening hand")
     grasper.open_hand()
-    time.sleep(0.1)
     
     # move down to close fingers around object
     rospy.loginfo("move tool tip to object pose")
-    grasper.move_tip(y=-0.18)
+    grasper.move_tip(y=-0.164)
     time.sleep(0.1)
     
     rospy.loginfo("check if hand is open")
     grasper.check_fingers_collisions(False)
-    time.sleep(0.1)
     
     rospy.loginfo("close hand")
     grasper.close_hand()
@@ -91,7 +83,7 @@ def grasp_object(object_pose):
     
     lift_object(object_pose)
     
-    move_object_to_location(pose, -0.15, 0.15, 0.774)  # the middle of the table 
+    move_object_to_location(pose)  # the middle of the table 
      
 def get_pose():
  
@@ -108,13 +100,13 @@ if __name__ == '__main__':
     
     try:
         # pose for testing grasping
-        # pose = Pose()
-        # pose.position.x = 0.15
-        # pose.position.y = 0
-        # pose.position.z = 0.772
-        # grasp_object(pose)
+        pose = Pose()
+        pose.position.x = 0.15
+        pose.position.y = 0
+        pose.position.z = 0.772
+        grasp_object(pose)
         
-        get_pose()
+        # get_pose()
         
     except rospy.ROSInterruptException:
         pass

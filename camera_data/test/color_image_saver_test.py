@@ -39,7 +39,7 @@ class ColorImageSaverTest(unittest.TestCase):
     def subscription_test(self):
         rospy.init_node("color_img_sub_test", anonymous=True)
         result = rospy.Subscriber("/kinect_sim/camera1/rgb/image_raw", Image, self.callback)
-        timeout_sub = time.time() + 30.0
+        timeout_sub = time.time() + 20.0
         while not rospy.is_shutdown() and not success and not time.time() < timeout_sub:
             time.sleep(1.0)
         self.assertTrue(result)

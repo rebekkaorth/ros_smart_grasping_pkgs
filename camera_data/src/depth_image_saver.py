@@ -21,8 +21,8 @@ bridge = CvBridge()
 
 def save_depth_image_callback(msg):
     
-    print("Received an depth image!")
-    print(type(msg))
+    rospy.loginfo("Received an depth image!")
+
     # cited code beginning
     # Retrieved from: https://answers.ros.org/question/255413/unable-to-store-the-depth-map-in-32fc1-format/ - 24/07/2018
     # Username: Joy16
@@ -31,7 +31,6 @@ def save_depth_image_callback(msg):
         NewImg = bridge.imgmsg_to_cv2(msg,"passthrough")
         depth_array = np.array(NewImg, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
-        print msg.encoding
         cv2.imwrite("/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/depth-imgs/depth.png", depth_array*255)
     # cited code end     
         

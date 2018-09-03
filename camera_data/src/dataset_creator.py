@@ -65,7 +65,7 @@ def save_depth_image(msg):
         depth_array = np.array(depth_img, dtype=np.float32)
         cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
         
-        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-' + str(image_number) + '.png', depth_img)
+        cv2.imwrite('/workspace/src/ros_smart_grasping_pkgs/camera_data/imgs/dataset-images/depth-image-' + str(image_number) + '.png', depth_array*255)
     # cited code end  
      
     except CvBridgeError, er: 
