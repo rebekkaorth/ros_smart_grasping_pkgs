@@ -276,6 +276,10 @@ This also results in the sometimes unconventional behaviour of the robot. For ex
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/loading_fail.png "robotic arm fail")
 
+Another problem that was encountered when running the simulation/ this project's Docker image was that the Kinect topics, needed to save color and depth images, are not always available when the simulation is started. If that problem occurs, the simulation needs to be restarted. 
+
+In addition to that, when running the camera_data nodes, which save camera data, sometimes take some time to properly load. 
+
 ## Author
 
 Rebekka Orth - 2312288O - 2312288O@student.gla.ac.uk
