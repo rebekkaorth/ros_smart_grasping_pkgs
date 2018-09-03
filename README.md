@@ -26,7 +26,7 @@ Path overview:
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/path_overview.png "path overview")
 
-In addition to the path overview a package architecture model has been created to give a detailed overview: 
+In addition to the path overview, a package architecture model has been created to give a detailed overview: 
 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/Node_design.png "node design")
   
@@ -112,8 +112,8 @@ Story: "As a user I want to have a neural network, that is able to predict objec
 
 ### System Architecture
 
-Based on the above mention user stories, the system architecture was developed. 
-Due to already gathered knowledge in that language, all nodes were written in Python.
+Based on the above mentioned user stories, the system architecture was developed. 
+Due to the already gathered knowledge in that language, all nodes were written in Python.
 
 UML Diagram: 
 ![alt tag](https://github.com/rebekkaorth/ros_smart_grasping_pkgs/blob/master/screenshots_for_repo/UML_Ros_SmartGraspingPkgs.png "UML diagram")
@@ -129,12 +129,18 @@ To use these packages, you first need to ensure that you have installed [Docker]
 
 Then you have two ways to run them: 
 
-1. Run the simulation using the Sahdow Robotic's Docker Hub repository and clone these packages into the IDE 
+1. Run the latest Docker Hub image of this project
+
+```
+docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 rebor94/robotic_grip_grab_shadow_robotics:latest
+```
+
+2. Run the simulation using the Sahdow Robot's Docker Hub repository and clone these packages into the IDE (that way, you can use the latest version of the Shadow Robot sandbox)
 
 Start the Shadow Robotic's simulation
 
 ```
-docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox
+docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 shadowrobot/smart_grasping_sandbox:latest
 ```
 
 Open your favorite browser and open: 
@@ -165,12 +171,6 @@ directory. And clone this directory with:
 git clone https://github.com/rebekkaorth/ros_smart_grasping_pkgs.git
 ```
 
-2. Run the latest Docker Hub image 
-
-```
-docker run -it --name sgs -p 8080:8080 -p 8888:8888 -p 8181:8181 -p 7681:7681 rebor94/robotic_grip_grab_shadow_robotics:latest
-```
-
 ## Run the camera_data package
 
 The camera_data package contains files to save different information provided by the Kinect camera in separate files in the img-folder. For each of the different information that can be saved, different nodes can be ran to get the information. 
@@ -181,7 +181,7 @@ To run the nodes ensure that you are still in the
 /workspace/src
 ```
 
-directory. To ensure that the needed topics are available, you should check all currently available topics by calling: 
+directory. To ensure that the needed topics are available, you should check all currently available topics by calling (when starting the simulation, the Kinect topics are not always available): 
 
 ```
 rostopic list
@@ -239,10 +239,10 @@ The neural network itself is not yet implemented. Which means, so far the nn_con
 
 ### dataset_creator + camera_mover nodes (in further detail) 
 
-Both nodes fulfill the requirement of developing nodes that enable the creation of datasets of different objects. To save images and move the robotic arm at the same time, the functionality was split into two nodes. One node moves the camera around the object and the other node saves color- and depth-images. The nodes were developed under the assumptions that objects are placed on the table (provided by the sandbox) on the right lower corner. That enables the robotic arm to move around the corner and therefore makes it possible to take pictures of objects. Images in a ca. 90 degree angle can be taken.
+Both nodes fulfill the requirement of developing nodes that enable the creation of datasets of different objects. To save images and move the robotic arm at the same time, the functionality was split into two nodes. One node moves the camera around the object and the other node saves color- and depth-images. The nodes were developed under the assumptions that objects are placed on the table (provided within the sandbox) on the right lower corner. That enables the robotic arm to move around the corner and therefore makes it possible to take pictures of objects. Images in a ca. 90 degree angle can be taken.
 All images are saved in a separate directory in '/camera_data/imgs/dataset_images/'. 
 
-The assumption of the placement of objects on the table was made in order to be able to move the robotic arm at the same hieght as the object is. Would objects be placed on the floor, for example, the camera could not capture the whole object. Moreover, the robotic arm does not move around the entire table due to the length of the robotic arm. 
+The assumption of the placement of objects on the table was made in order to be able to move the robotic arm at the same hieght as the object is. Would objects be placed on the floor, for example, the camera could not capture the whole object. Moreover, the robotic arm does not move around the entire table due to its length. 
 
 Problem encountered: 
 The camera has to move according to the movement of the robotic arm in order to be able to take pictures of the object at every angle. Due to the scope of the project, this issue has not been resolved. 
@@ -258,7 +258,7 @@ $ nosetests -v ros_smart_grasping_pkgs/<pkg_name>/test/<file_name>
 More detail on how to run unit tests in ROS can be found here: https://personalrobotics.ri.cmu.edu/software/unit-testing
 
 ## Problems encountered during the development 
-To fulfill one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "camera-change-03-09-18" (![Docker Image] (https://hub.docker.com/r/rebor94/robotic_grip_grab_shadow_robotics/tags/). Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
+To fulfill one requirement of the project, an attempt to change the position of the Kinect camera was started. The results of this attempt can be found in the image: "camera-change-03-09-18-final" (![Docker Image] (https://hub.docker.com/r/rebor94/robotic_grip_grab_shadow_robotics/tags/). Unfortunately, it was not possible to mount the camera on to the robotic arm. Even though several different attempts were done to connect the camera with the robotic arm, the requirement could not be fulfilled. The cause of the problem could not be fully detected since not all files are provided in the sandbox. 
 
 This screenshot shows the latest status of that image: 
 
