@@ -83,7 +83,7 @@ def grasp_object(object_pose):
     
     lift_object(object_pose)
     
-    move_object_to_location(pose)  # the middle of the table 
+    move_object_to_location(object_pose)  # the middle of the table 
      
 def get_pose():
  
